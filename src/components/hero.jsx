@@ -6,15 +6,13 @@ export default function Hero() {
       id="home"
       className="min-h-screen flex items-center justify-center px-6 py-20"
     >
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-        
-        {/* Left Side */}
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
         <div>
-          <p className="text-blue-500 font-semibold text-xl mb-4">
+          <p className="text-blue-500 font-semibold text-lg mb-4">
             Full Stack Developer
           </p>
 
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white max-w-[650px]">
             Mohammadamin
             <br />
             Mollakazemiha
@@ -25,43 +23,35 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-wrap gap-3 mt-8">
-            <span className="px-4 py-2 rounded-full border border-white/20">
-              React
-            </span>
-
-            <span className="px-4 py-2 rounded-full border border-white/20">
-              Django
-            </span>
-
-            <span className="px-4 py-2 rounded-full border border-white/20">
-              Node.js
-            </span>
-
-            <span className="px-4 py-2 rounded-full border border-white/20">
-              MongoDB
-            </span>
-
-            <span className="px-4 py-2 rounded-full border border-white/20">
-              AI
-            </span>
-
-            <span className="px-4 py-2 rounded-full border border-white/20">
-              Python
-            </span>
+            {["React", "Django", "Node.js", "MongoDB", "AI", "Python"].map(
+              (item) => (
+                <span
+                  key={item}
+                  className="px-4 py-2 rounded-full border border-white/20 text-white"
+                >
+                  {item}
+                </span>
+              )
+            )}
           </div>
 
-          <div className="flex gap-4 mt-10">
-            <button className="bg-blue-600 hover:bg-blue-700 transition px-8 py-3 rounded-full font-semibold">
+          <div className="flex flex-wrap gap-4 mt-10">
+            <a
+              href="#projects"
+              className="bg-blue-600 hover:bg-blue-700 transition px-8 py-3 rounded-full font-semibold text-white inline-block"
+            >
               View Projects
-            </button>
+            </a>
 
-            <button className="border border-white/20 hover:border-white/40 transition px-8 py-3 rounded-full font-semibold">
+            <a
+              href="#contact"
+              className="border border-white/20 hover:border-white/40 transition px-8 py-3 rounded-full font-semibold text-white inline-block"
+            >
               Contact Me
-            </button>
+            </a>
           </div>
         </div>
 
-        {/* Right Side */}
         <motion.div
           initial={{ opacity: 0, scale: 0.7 }}
           animate={{ opacity: 1, scale: 1 }}
