@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { FaArrowUp } from "react-icons/fa";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function ScrollTop() {
   const [show, setShow] = useState(false);
+  const { content, language } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,10 +25,10 @@ export default function ScrollTop() {
           behavior: "smooth",
         })
       }
+      aria-label={content.accessibility.scrollTop}
       className="
         fixed
         bottom-24
-        right-8
         z-[9999]
         w-14
         h-14
@@ -43,6 +45,7 @@ export default function ScrollTop() {
         transition-all
         duration-300
       "
+      style={{ [language === "fa" ? "left" : "right"]: "2rem" }}
     >
       <FaArrowUp />
     </button>

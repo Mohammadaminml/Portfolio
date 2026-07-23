@@ -5,24 +5,26 @@ import {
   FaTelegram,
   FaXTwitter,
 } from "react-icons/fa6";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Contact() {
+  const { content } = useLanguage();
   return (
     <section id="contact" className="py-32">
       <div className="max-w-6xl mx-auto px-6">
 
         <h2 className="text-5xl font-bold mb-16">
-          Contact Me
+          {content.contact.title}
         </h2>
 
         <div className="glass rounded-[40px] p-10">
 
           <h3 className="text-3xl font-bold">
-            Let's Build Something Great
+            {content.contact.heading}
           </h3>
 
           <p className="text-gray-400 mt-4">
-            You can contact me through social media for collaborations, projects, or consulting opportunities.
+            {content.contact.description}
           </p>
 
           <div className="grid md:grid-cols-2 gap-6 mt-10">
@@ -31,12 +33,13 @@ export default function Contact() {
               href="mailto:mohammadaminmollakazemiha@gmail.com"
               className="glass p-6 rounded-3xl"
             >
-              📧   Email
+              📧 {content.contact.email}
             </a>
 
             <a
               href="https://github.com/Mohammadaminml"
               target="_blank"
+              rel="noreferrer"
               className="glass p-6 rounded-3xl flex items-center gap-3"
             >
               <FaGithub />
@@ -46,6 +49,7 @@ export default function Contact() {
             <a
               href="https://www.linkedin.com/in/mohammad-amin-mollakazemiha-52a3a2201"
               target="_blank"
+              rel="noreferrer"
               className="glass p-6 rounded-3xl flex items-center gap-3"
             >
               <FaLinkedin />
@@ -55,6 +59,7 @@ export default function Contact() {
             <a
               href="https://www.instagram.com/mohammadamin_tech"
               target="_blank"
+              rel="noreferrer"
               className="glass p-6 rounded-3xl flex items-center gap-3"
             >
               <FaInstagram />
@@ -64,6 +69,7 @@ export default function Contact() {
             <a
               href="https://t.me/MohammadAminTech"
               target="_blank"
+              rel="noreferrer"
               className="glass p-6 rounded-3xl flex items-center gap-3"
             >
               <FaTelegram />
@@ -73,6 +79,7 @@ export default function Contact() {
             <a
               href="https://x.com/mamiopv"
               target="_blank"
+              rel="noreferrer"
               className="glass p-6 rounded-3xl flex items-center gap-3"
             >
               <FaXTwitter />

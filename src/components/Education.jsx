@@ -1,22 +1,26 @@
 import education from "../data/education";
 import { motion } from "framer-motion";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Education() {
+  const { content } = useLanguage();
   return (
     <section id="education" className="py-32">
 
       <div className="max-w-6xl mx-auto px-6">
 
         <h2 className="text-5xl font-bold mb-16">
-          Education
+          {content.education.title}
         </h2>
 
         <div className="space-y-8">
 
-          {education.map((item, index) => (
+          {education.map((item, index) => {
+            const [degree, field, university, period] = content.education.items[index];
+            return (
 
             <motion.div
-              key={index}
+              key={item.degree}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: .7 }}
@@ -24,24 +28,24 @@ export default function Education() {
             >
 
               <h3 className="text-2xl font-bold">
-                {item.degree}
+                {degree}
               </h3>
 
               <p className="text-blue-400 mt-2">
-                {item.field}
+                {field}
               </p>
 
               <p className="text-gray-300 mt-2">
-                {item.university}
+                {university}
               </p>
 
               <p className="text-gray-500 mt-3">
-                {item.period}
+                {period}
               </p>
 
             </motion.div>
 
-          ))}
+          )})}
 
         </div>
 

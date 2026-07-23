@@ -2,14 +2,126 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 body {
   margin: 0;
   overflow-x: hidden;
-  background: #000;
+  background: #05070b;
   color: white;
-  font-family: Inter, sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+}
+
+html[dir="rtl"] body {
+  font-family: Tahoma, Arial, sans-serif;
+}
+
+html[dir="rtl"] .nav-dropdown {
+  right: auto;
+  left: 0;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.site-noise {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+}
+
+.nav-link {
+  color: rgb(156 163 175);
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link-active {
+  color: white;
+}
+
+.nav-link-active {
+  position: relative;
+}
+
+.nav-link-active::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 -9px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2997ff, #7c5cff);
+  box-shadow: 0 0 12px rgba(41, 151, 255, 0.65);
+}
+
+.nav-dropdown {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+
+.nav-more:hover .nav-dropdown,
+.nav-more:focus-within .nav-dropdown {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.loader {
+  width: 42px;
+  height: 42px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #2997ff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+section:not(#home) {
+  min-height: calc(100vh - 166px);
+  padding-top: 9rem;
+}
+
+section:not(#home) h2 {
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #fff 20%, #9ca3af 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (max-width: 640px) {
+  section:not(#home) {
+    padding-top: 7.5rem;
+    padding-bottom: 5rem;
+  }
+
+  section:not(#home) h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
 }
 
 ::selection {
@@ -18,13 +130,135 @@ body {
 }
 
 .glass {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(30px);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: linear-gradient(145deg, rgba(255,255,255,0.07), rgba(255,255,255,0.025));
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255,255,255,0.09);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 24px 80px rgba(0,0,0,0.18);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass:hover {
+  border-color: rgba(77, 157, 255, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 30px 90px rgba(0,0,0,0.28);
 }
 
 .apple-gradient {
   background:
-    radial-gradient(circle at top left,#2997ff22,transparent 40%),
-    radial-gradient(circle at bottom right,#7c3aed22,transparent 40%);
+    radial-gradient(ellipse 70% 55% at 10% -10%, rgba(41,151,255,.17), transparent 65%),
+    radial-gradient(ellipse 55% 45% at 95% 95%, rgba(124,58,237,.12), transparent 70%),
+    #05070b;
+}
+
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  width: 34rem;
+  height: 34rem;
+  top: 8%;
+  left: -18rem;
+  border-radius: 50%;
+  background: rgba(41, 151, 255, 0.12);
+  filter: blur(100px);
+  pointer-events: none;
+}
+
+.hero-title {
+  letter-spacing: -0.055em;
+  background: linear-gradient(135deg, #fff 25%, #9ca3af 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.status-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 0 5px rgba(52, 211, 153, 0.1), 0 0 18px rgba(52, 211, 153, 0.75);
+}
+
+.tech-pill {
+  background: rgba(255,255,255,0.045);
+  border: 1px solid rgba(255,255,255,0.09);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #147ce5, #5b5ce2);
+  box-shadow: 0 12px 35px rgba(20, 124, 229, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 45px rgba(20, 124, 229, 0.42);
+}
+
+.secondary-button {
+  background: rgba(255,255,255,0.035);
+  border: 1px solid rgba(255,255,255,0.14);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.secondary-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.28);
+}
+
+.portrait-grid {
+  opacity: 0.3;
+  background-image:
+    linear-gradient(rgba(255,255,255,.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+.hero-portrait {
+  border: 1px solid rgba(255,255,255,0.13);
+  box-shadow: 0 35px 100px rgba(0,0,0,.6), 0 0 0 8px rgba(255,255,255,.025);
+}
+
+.experience-badge {
+  z-index: 2;
+  min-width: 13rem;
+}
+
+html[dir="rtl"] .primary-button span {
+  transform: rotate(180deg);
+}
+
+:focus-visible {
+  outline: 2px solid #2997ff;
+  outline-offset: 4px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero-portrait-wrap {
+    max-width: 30rem;
+    margin-inline: auto;
+    width: 100%;
+  }
 }

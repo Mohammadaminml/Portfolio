@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function About() {
+  const { content } = useLanguage();
   return (
     <section
       id="about"
@@ -15,35 +17,19 @@ export default function About() {
         >
 
           <h2 className="text-5xl font-bold mb-12">
-            About Me
+            {content.about.title}
           </h2>
 
           <div className="glass p-10 rounded-[40px]">
 
-            <p className="text-gray-300 text-xl leading-relaxed">
-              I am a Full Stack Developer focused on designing and
-              building modern web applications. I enjoy creating
-              scalable, high-performance solutions and delivering
-              exceptional user experiences through clean and efficient
-              code.
-            </p>
-
-            <p className="text-gray-400 mt-8 leading-loose">
-              Since 2020, I have been working professionally in software
-              development, specializing in both frontend and backend
-              technologies. My expertise includes React, Node.js,
-              Django, Python, JavaScript, TypeScript, MongoDB,
-              PostgreSQL, MySQL, and modern web architectures.
-            </p>
-
-            <p className="text-gray-400 mt-6 leading-loose">
-              In addition to web development, I have experience in
-              Artificial Intelligence, Machine Learning, Computer
-              Vision, and software engineering with C and C++.
-              I am passionate about building innovative digital
-              products that combine functionality, performance,
-              and great design.
-            </p>
+            {content.about.paragraphs.map((paragraph, index) => (
+              <p
+                key={paragraph}
+                className={index === 0 ? "text-gray-300 text-xl leading-relaxed" : "text-gray-400 mt-6 leading-loose"}
+              >
+                {paragraph}
+              </p>
+            ))}
 
           </div>
 

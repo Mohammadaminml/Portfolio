@@ -1,22 +1,26 @@
 import projects from "../data/projects";
 import { motion } from "framer-motion";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Projects() {
+  const { content } = useLanguage();
   return (
     <section id="projects" className="py-32">
 
       <div className="max-w-7xl mx-auto px-6">
 
         <h2 className="text-5xl font-bold mb-16">
-          Featured Projects
+          {content.projects.title}
         </h2>
 
         <div className="grid md:grid-cols-2 gap-8">
 
-          {projects.map((project, index) => (
+          {projects.map((project, index) => {
+            const [title, description] = content.projects.items[index];
+            return (
 
             <motion.div
-              key={index}
+              key={project.title}
               whileHover={{
                 y: -10,
                 scale: 1.02,
@@ -25,11 +29,11 @@ export default function Projects() {
             >
 
               <h3 className="text-2xl font-bold">
-                {project.title}
+                {title}
               </h3>
 
               <p className="text-gray-400 mt-4">
-                {project.description}
+                {description}
               </p>
 
               <div className="flex flex-wrap gap-2 mt-6">
@@ -46,7 +50,7 @@ export default function Projects() {
               </div>
 
             </motion.div>
-          ))}
+          )})}
 
         </div>
 
