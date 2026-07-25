@@ -1,6 +1,7 @@
 import skills from "../data/skills";
 import { motion } from "framer-motion";
 import { useLanguage } from "../i18n/LanguageContext";
+import { cardReveal, fadeUp, stagger, viewport } from "../animations/motion";
 
 export default function Skills() {
   const { content } = useLanguage();
@@ -9,16 +10,18 @@ export default function Skills() {
 
       <div className="max-w-6xl mx-auto px-6">
 
-        <h2 className="text-5xl font-bold mb-16">
+        <motion.h2 variants={fadeUp} initial="hidden" animate="visible" className="text-5xl font-bold mb-16">
           {content.skills.title}
-        </h2>
+        </motion.h2>
 
-        <div className="space-y-10">
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={viewport} className="space-y-10">
 
           {skills.map((group, groupIndex) => (
-            <div
+            <motion.div
               key={group.category}
-              className="glass p-8 rounded-[30px]"
+              variants={cardReveal}
+              whileHover={{ y: -5 }}
+              className="glass accent-card p-8 rounded-[30px]"
             >
 
               <h3 className="text-2xl font-bold mb-8">
@@ -39,7 +42,7 @@ export default function Skills() {
 
                   </div>
 
-                  <div className="h-3 bg-white/10 rounded-full overflow-hidden">
+                  <div className="skill-track h-2.5 rounded-full overflow-hidden">
 
                     <motion.div
                       initial={{ width: 0 }}
@@ -47,9 +50,12 @@ export default function Skills() {
                         width: `${skill.level}%`,
                       }}
                       transition={{
-                        duration: 1.5,
+                        duration: 1.3,
+                        delay: groupIndex * 0.08,
+                        ease: [0.22, 1, 0.36, 1],
                       }}
-                      className="h-full bg-blue-500"
+                      viewport={viewport}
+                      className="skill-progress h-full"
                     />
 
                   </div>
@@ -57,10 +63,10 @@ export default function Skills() {
                 </div>
               ))}
 
-            </div>
+            </motion.div>
           ))}
 
-        </div>
+        </motion.div>
 
       </div>
 

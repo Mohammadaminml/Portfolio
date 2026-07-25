@@ -1,6 +1,7 @@
 import education from "../data/education";
 import { motion } from "framer-motion";
 import { useLanguage } from "../i18n/LanguageContext";
+import { cardReveal, fadeUp, stagger, viewport } from "../animations/motion";
 
 export default function Education() {
   const { content } = useLanguage();
@@ -9,11 +10,11 @@ export default function Education() {
 
       <div className="max-w-6xl mx-auto px-6">
 
-        <h2 className="text-5xl font-bold mb-16">
+        <motion.h2 variants={fadeUp} initial="hidden" animate="visible" className="text-5xl font-bold mb-16">
           {content.education.title}
-        </h2>
+        </motion.h2>
 
-        <div className="space-y-8">
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={viewport} className="space-y-8">
 
           {education.map((item, index) => {
             const [degree, field, university, period] = content.education.items[index];
@@ -21,10 +22,9 @@ export default function Education() {
 
             <motion.div
               key={item.degree}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: .7 }}
-              className="glass p-8 rounded-[30px]"
+              variants={cardReveal}
+              whileHover={{ y: -6 }}
+              className="glass accent-card education-card p-8 rounded-[30px]"
             >
 
               <h3 className="text-2xl font-bold">
@@ -47,7 +47,7 @@ export default function Education() {
 
           )})}
 
-        </div>
+        </motion.div>
 
       </div>
 

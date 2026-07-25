@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import {
   FaBars,
@@ -32,13 +33,21 @@ const linkClass = ({ isActive }) =>
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { content, language, toggleLanguage } = useLanguage();
 
   const closeMenu = () => setIsOpen(false);
 
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/70 border-b border-white/10">
-      <div className="max-w-7xl mx-auto px-6 h-18 flex justify-between items-center">
+    <nav className={`site-nav fixed top-0 left-0 w-full z-50 ${isScrolled ? "site-nav-scrolled" : ""}`}>
+      <div className={`max-w-7xl mx-auto px-6 flex justify-between items-center transition-all duration-300 ${isScrolled ? "h-16" : "h-20"}`}>
         <NavLink to="/" className="text-white text-xl font-bold" onClick={closeMenu}>
           {content.nav.portfolio}
         </NavLink>
@@ -107,8 +116,14 @@ export default function Navbar() {
         </button>
       </div>
 
+      <AnimatePresence>
       {isOpen && (
-        <div className="lg:hidden max-h-[calc(100vh-72px)] overflow-y-auto border-t border-white/10 bg-black/95 px-6 py-4">
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          className="lg:hidden max-h-[calc(100vh-72px)] overflow-y-auto border-t border-white/10 bg-black/95 px-6 py-4"
+        >
           <div className="max-w-7xl mx-auto grid sm:grid-cols-2 gap-1">
             {navigation.map((item) => (
               <NavLink
@@ -125,8 +140,9 @@ export default function Navbar() {
               </NavLink>
             ))}
           </div>
-        </div>
+        </motion.div>
       )}
+      </AnimatePresence>
     </nav>
   );
 }

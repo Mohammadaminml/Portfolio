@@ -35,6 +35,40 @@ export const translations = {
       imageAlt: "Mohammadamin Mollakazemiha",
       techs: shared.techs,
     },
+    home: {
+      services: {
+        kicker: "What I do",
+        title: "From idea to a reliable digital product",
+        description: "I combine product thinking, clean engineering, and modern technology to create experiences that are useful, fast, and built to grow.",
+        items: [
+          ["Frontend Engineering", "Responsive, accessible, and polished interfaces built with React and modern frontend architecture."],
+          ["Backend & APIs", "Secure and scalable backend systems, APIs, databases, and integrations designed for real-world products."],
+          ["AI Solutions", "Practical AI, machine learning, and computer vision solutions that turn complex data into useful outcomes."],
+        ],
+      },
+      stats: [
+        ["5+", "Years of coding"],
+        ["20+", "Delivered projects"],
+        ["150+", "Students mentored"],
+        ["3", "Published papers"],
+      ],
+      projects: {
+        kicker: "Selected work",
+        title: "Projects built around real problems",
+        description: "A selection of products and technical solutions across web development, backend systems, Android, and artificial intelligence.",
+        viewAll: "Explore all projects",
+        items: [
+          ["Full Stack Platforms", "Modern products with thoughtfully designed interfaces and scalable backend architecture.", ["React", "Django", "PostgreSQL"]],
+          ["AI & Computer Vision", "Intelligent systems focused on practical automation, analysis, and visual understanding.", ["Python", "OpenCV", "Keras"]],
+        ],
+      },
+      cta: {
+        kicker: "Have a project in mind?",
+        title: "Let’s create something that stands out.",
+        description: "I am open to selected collaborations, product development, and consulting opportunities.",
+        button: "Start a conversation",
+      },
+    },
     about: {
       title: "About Me",
       paragraphs: [
@@ -128,6 +162,40 @@ export const translations = {
       contact: "تماس با من",
       imageAlt: "محمدامین ملاکاظمی‌ها",
       techs: shared.techs,
+    },
+    home: {
+      services: {
+        kicker: "حوزه فعالیت من",
+        title: "از یک ایده تا محصول دیجیتال قابل اعتماد",
+        description: "با ترکیب نگاه محصول‌محور، مهندسی تمیز و فناوری‌های مدرن، تجربه‌هایی می‌سازم که کاربردی، سریع و آماده رشد هستند.",
+        items: [
+          ["مهندسی فرانت‌اند", "رابط‌های واکنش‌گرا، دسترس‌پذیر و حرفه‌ای با React و معماری مدرن فرانت‌اند."],
+          ["بک‌اند و API", "سامانه‌های بک‌اند امن و مقیاس‌پذیر، API، پایگاه داده و یکپارچه‌سازی برای محصولات واقعی."],
+          ["راهکارهای هوش مصنوعی", "راهکارهای کاربردی هوش مصنوعی، یادگیری ماشین و بینایی ماشین برای تبدیل داده‌های پیچیده به نتیجه‌ای مفید."],
+        ],
+      },
+      stats: [
+        ["+۵", "سال برنامه‌نویسی"],
+        ["+۲۰", "پروژه اجراشده"],
+        ["+۱۵۰", "دانشجوی آموزش‌دیده"],
+        ["۳", "مقاله منتشرشده"],
+      ],
+      projects: {
+        kicker: "نمونه‌کارهای منتخب",
+        title: "پروژه‌هایی برای حل مسائل واقعی",
+        description: "مجموعه‌ای از محصولات و راهکارهای فنی در توسعه وب، سامانه‌های بک‌اند، اندروید و هوش مصنوعی.",
+        viewAll: "مشاهده همه پروژه‌ها",
+        items: [
+          ["پلتفرم‌های فول‌استک", "محصولات مدرن با رابط کاربری دقیق و معماری بک‌اند مقیاس‌پذیر.", ["React", "Django", "PostgreSQL"]],
+          ["هوش مصنوعی و بینایی ماشین", "سامانه‌های هوشمند با تمرکز بر خودکارسازی، تحلیل و درک تصاویر.", ["Python", "OpenCV", "Keras"]],
+        ],
+      },
+      cta: {
+        kicker: "ایده‌ای برای اجرا دارید؟",
+        title: "بیایید چیزی بسازیم که متفاوت باشد.",
+        description: "برای همکاری‌های منتخب، توسعه محصول و فرصت‌های مشاوره آماده گفت‌وگو هستم.",
+        button: "شروع گفت‌وگو",
+      },
     },
     about: {
       title: "درباره من",

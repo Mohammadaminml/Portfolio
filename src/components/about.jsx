@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "../i18n/LanguageContext";
+import { fadeUp, stagger, viewport } from "../animations/motion";
 
 export default function About() {
   const { content } = useLanguage();
@@ -11,27 +12,29 @@ export default function About() {
       <div className="max-w-6xl mx-auto px-6">
 
         <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={stagger}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewport}
         >
 
-          <h2 className="text-5xl font-bold mb-12">
+          <motion.h2 variants={fadeUp} className="text-5xl font-bold mb-12">
             {content.about.title}
-          </h2>
+          </motion.h2>
 
-          <div className="glass p-10 rounded-[40px]">
+          <motion.div variants={fadeUp} className="glass accent-card p-10 rounded-[40px]">
 
             {content.about.paragraphs.map((paragraph, index) => (
-              <p
+              <motion.p
                 key={paragraph}
+                variants={fadeUp}
                 className={index === 0 ? "text-gray-300 text-xl leading-relaxed" : "text-gray-400 mt-6 leading-loose"}
               >
                 {paragraph}
-              </p>
+              </motion.p>
             ))}
 
-          </div>
+          </motion.div>
 
         </motion.div>
 

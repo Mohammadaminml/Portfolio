@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "../i18n/LanguageContext";
+import { fadeUp, viewport } from "../animations/motion";
 
 export default function Experience() {
   const { content, language } = useLanguage();
@@ -7,24 +8,29 @@ export default function Experience() {
     <section className="py-32" id="experience">
       <div className="max-w-6xl mx-auto px-6">
 
-        <h2 className="text-5xl font-bold mb-16">
+        <motion.h2 variants={fadeUp} initial="hidden" animate="visible" className="text-5xl font-bold mb-16">
           {content.experience.title}
-        </h2>
+        </motion.h2>
 
         <div className={`relative ${language === "fa" ? "border-r mr-4" : "border-l ml-4"} border-white/10`}>
 
-          {content.experience.items.map(([title, company, year]) => (
+          {content.experience.items.map(([title, company, year], index) => (
             <motion.div
               key={title}
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: language === "fa" ? 45 : -45 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: .6 }}
+              viewport={viewport}
+              transition={{ duration: .6, delay: index * .1, ease: [0.22, 1, 0.36, 1] }}
               className={language === "fa" ? "mb-12 mr-8" : "mb-12 ml-8"}
             >
 
-              <div className={`absolute w-4 h-4 bg-blue-500 rounded-full mt-2 ${language === "fa" ? "-right-2" : "-left-2"}`} />
+              <motion.div
+                className={`timeline-dot absolute w-4 h-4 rounded-full mt-2 ${language === "fa" ? "-right-2" : "-left-2"}`}
+                whileInView={{ scale: [0, 1.35, 1] }}
+                viewport={viewport}
+              />
 
-              <div className="glass p-6 rounded-3xl">
+              <motion.div whileHover={{ x: language === "fa" ? -6 : 6 }} className="glass accent-card p-6 rounded-3xl">
                 <h3 className="text-2xl font-bold">
                   {title}
                 </h3>
@@ -36,7 +42,7 @@ export default function Experience() {
                 <p className="text-gray-400 mt-2">
                   {year}
                 </p>
-              </div>
+              </motion.div>
 
             </motion.div>
           ))}

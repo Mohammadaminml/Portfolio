@@ -1,6 +1,7 @@
 import projects from "../data/projects";
 import { motion } from "framer-motion";
 import { useLanguage } from "../i18n/LanguageContext";
+import { cardReveal, fadeUp, stagger, viewport } from "../animations/motion";
 
 export default function Projects() {
   const { content } = useLanguage();
@@ -9,11 +10,11 @@ export default function Projects() {
 
       <div className="max-w-7xl mx-auto px-6">
 
-        <h2 className="text-5xl font-bold mb-16">
+        <motion.h2 variants={fadeUp} initial="hidden" animate="visible" className="text-5xl font-bold mb-16">
           {content.projects.title}
-        </h2>
+        </motion.h2>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={viewport} className="grid md:grid-cols-2 gap-8">
 
           {projects.map((project, index) => {
             const [title, description] = content.projects.items[index];
@@ -21,12 +22,13 @@ export default function Projects() {
 
             <motion.div
               key={project.title}
+              variants={cardReveal}
               whileHover={{
-                y: -10,
-                scale: 1.02,
+                y: -9,
               }}
-              className="glass p-8 rounded-[35px]"
+              className="glass project-card p-8 rounded-[35px]"
             >
+              <span className="project-number">0{index + 1}</span>
 
               <h3 className="text-2xl font-bold">
                 {title}
@@ -41,7 +43,7 @@ export default function Projects() {
                 {project.tech.map((tech) => (
                   <span
                     key={tech}
-                    className="px-4 py-2 bg-white/5 rounded-full"
+                    className="project-tech px-4 py-2 rounded-full text-sm"
                   >
                     {tech}
                   </span>
@@ -52,7 +54,7 @@ export default function Projects() {
             </motion.div>
           )})}
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

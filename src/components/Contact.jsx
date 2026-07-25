@@ -5,7 +5,19 @@ import {
   FaTelegram,
   FaXTwitter,
 } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+import { motion } from "framer-motion";
 import { useLanguage } from "../i18n/LanguageContext";
+import { cardReveal, fadeUp, stagger, viewport } from "../animations/motion";
+
+const contactLinks = [
+  ["email", "mailto:mohammadaminmollakazemiha@gmail.com", MdEmail],
+  ["GitHub", "https://github.com/Mohammadaminml", FaGithub],
+  ["LinkedIn", "https://www.linkedin.com/in/mohammad-amin-mollakazemiha-52a3a2201", FaLinkedin],
+  ["Instagram", "https://www.instagram.com/mohammadamin_tech", FaInstagram],
+  ["Telegram", "https://t.me/MohammadAminTech", FaTelegram],
+  ["X (Twitter)", "https://x.com/mamiopv", FaXTwitter],
+];
 
 export default function Contact() {
   const { content } = useLanguage();
@@ -13,11 +25,11 @@ export default function Contact() {
     <section id="contact" className="py-32">
       <div className="max-w-6xl mx-auto px-6">
 
-        <h2 className="text-5xl font-bold mb-16">
+        <motion.h2 variants={fadeUp} initial="hidden" animate="visible" className="text-5xl font-bold mb-16">
           {content.contact.title}
-        </h2>
+        </motion.h2>
 
-        <div className="glass rounded-[40px] p-10">
+        <motion.div variants={fadeUp} initial="hidden" animate="visible" className="glass contact-panel rounded-[40px] p-8 md:p-12">
 
           <h3 className="text-3xl font-bold">
             {content.contact.heading}
@@ -27,68 +39,25 @@ export default function Contact() {
             {content.contact.description}
           </p>
 
-          <div className="grid md:grid-cols-2 gap-6 mt-10">
+          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={viewport} className="grid md:grid-cols-2 gap-4 mt-10">
+            {contactLinks.map(([label, href, Icon]) => (
+              <motion.a
+                key={label}
+                href={href}
+                target={label === "email" ? undefined : "_blank"}
+                rel={label === "email" ? undefined : "noreferrer"}
+                variants={cardReveal}
+                whileHover={{ x: 5 }}
+                className="contact-link glass p-5 rounded-2xl flex items-center gap-4"
+              >
+                <span className="contact-icon"><Icon /></span>
+                {label === "email" ? content.contact.email : label}
+                <span className="ms-auto text-gray-600" aria-hidden="true">↗</span>
+              </motion.a>
+            ))}
+          </motion.div>
 
-            <a
-              href="mailto:mohammadaminmollakazemiha@gmail.com"
-              className="glass p-6 rounded-3xl"
-            >
-              📧 {content.contact.email}
-            </a>
-
-            <a
-              href="https://github.com/Mohammadaminml"
-              target="_blank"
-              rel="noreferrer"
-              className="glass p-6 rounded-3xl flex items-center gap-3"
-            >
-              <FaGithub />
-              GitHub
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/mohammad-amin-mollakazemiha-52a3a2201"
-              target="_blank"
-              rel="noreferrer"
-              className="glass p-6 rounded-3xl flex items-center gap-3"
-            >
-              <FaLinkedin />
-              LinkedIn
-            </a>
-
-            <a
-              href="https://www.instagram.com/mohammadamin_tech"
-              target="_blank"
-              rel="noreferrer"
-              className="glass p-6 rounded-3xl flex items-center gap-3"
-            >
-              <FaInstagram />
-              Instagram
-            </a>
-
-            <a
-              href="https://t.me/MohammadAminTech"
-              target="_blank"
-              rel="noreferrer"
-              className="glass p-6 rounded-3xl flex items-center gap-3"
-            >
-              <FaTelegram />
-              Telegram
-            </a>
-
-            <a
-              href="https://x.com/mamiopv"
-              target="_blank"
-              rel="noreferrer"
-              className="glass p-6 rounded-3xl flex items-center gap-3"
-            >
-              <FaXTwitter />
-              X (Twitter)
-            </a>
-
-          </div>
-
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import { useLanguage } from "./i18n/LanguageContext";
 
-const Hero = lazy(() => import("./components/Hero"));
+const Home = lazy(() => import("./components/Home"));
 const About = lazy(() => import("./components/About"));
 const Skills = lazy(() => import("./components/Skills"));
 const Experience = lazy(() => import("./components/Experience"));
@@ -42,7 +42,7 @@ export default function App() {
     <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route element={<Layout />}>
-          <Route index element={<Hero />} />
+          <Route index element={<Home />} />
           {routes.map(({ path, Component }) => (
             <Route key={path} path={path} element={<Component />} />
           ))}
