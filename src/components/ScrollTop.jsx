@@ -4,7 +4,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 
 export default function ScrollTop() {
   const [show, setShow] = useState(false);
-  const { content, language } = useLanguage();
+  const { content } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,7 +45,7 @@ export default function ScrollTop() {
         transition-all
         duration-300
       "
-      style={{ [language === "fa" ? "left" : "right"]: "2rem" }}
+      style={{ right: "2rem" }}
     >
       <FaArrowUp />
     </button>

@@ -34,7 +34,7 @@ const linkClass = ({ isActive }) =>
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { content, language, toggleLanguage } = useLanguage();
+  const { content } = useLanguage();
 
   const closeMenu = () => setIsOpen(false);
 
@@ -95,15 +95,6 @@ export default function Navbar() {
             <FaTelegram />
           </a>
         </div>
-
-        <button
-          type="button"
-          className="language-switch rounded-full border border-white/20 px-3 py-1.5 text-sm font-bold text-white hover:border-blue-400"
-          onClick={toggleLanguage}
-          aria-label={language === "en" ? "تغییر زبان به فارسی" : "Switch language to English"}
-        >
-          {language === "en" ? "FA" : "EN"}
-        </button>
 
         <button
           className="lg:hidden text-white text-2xl"

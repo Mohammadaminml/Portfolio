@@ -15,14 +15,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-html[dir="rtl"] body {
-  font-family: Tahoma, Arial, sans-serif;
-}
 
-html[dir="rtl"] .nav-dropdown {
-  right: auto;
-  left: 0;
-}
 
 button,
 a {
@@ -209,10 +202,6 @@ section:not(#home):not(.home-section) h2 {
   opacity: 0.65;
 }
 
-html[dir="rtl"] .accent-card::before {
-  left: auto;
-  right: 0;
-}
 
 .skill-track {
   background: rgba(255,255,255,0.07);
@@ -239,9 +228,6 @@ html[dir="rtl"] .accent-card::before {
   55%, 100% { transform: translateX(110%); }
 }
 
-html[dir="rtl"] .skill-progress::after {
-  animation-direction: reverse;
-}
 
 .timeline-dot {
   background: #2997ff;
@@ -273,10 +259,6 @@ html[dir="rtl"] .skill-progress::after {
   opacity: .14;
 }
 
-html[dir="rtl"] .project-card::after {
-  right: auto;
-  left: -7rem;
-}
 
 .project-number {
   display: block;
@@ -334,9 +316,6 @@ html[dir="rtl"] .project-card::after {
   transform: translate(3px, -3px);
 }
 
-html[dir="rtl"] .publication-card:hover .publication-link svg {
-  transform: translate(-3px, -3px);
-}
 
 .tech-card {
   min-height: 10.5rem;
@@ -550,9 +529,6 @@ html[dir="rtl"] .publication-card:hover .publication-link svg {
   transform: translateX(4px);
 }
 
-html[dir="rtl"] .home-text-link:hover svg {
-  transform: translateX(-4px) rotate(180deg);
-}
 
 .home-project-card {
   position: relative;
@@ -721,11 +697,11 @@ html[dir="rtl"] .home-text-link:hover svg {
 .experience-badge {
   z-index: 2;
   min-width: 13rem;
+  background: #0d1523;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.5);
 }
 
-html[dir="rtl"] .primary-button span {
-  transform: rotate(180deg);
-}
 
 :focus-visible {
   outline: 2px solid #2997ff;

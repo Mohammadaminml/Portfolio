@@ -80,10 +80,15 @@ export default function Hero() {
             alt={hero.imageAlt}
             className="hero-portrait relative rounded-[36px] w-full max-w-md mx-auto"
           />
-          <div className="experience-badge glass absolute -bottom-6 start-0 md:-start-5 rounded-2xl px-5 py-4">
+          <motion.div
+            className="experience-badge absolute -bottom-6 start-0 md:-start-5 rounded-2xl px-5 py-4"
+            animate={{ y: [0, -10, 0] }}
+            transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+            whileHover={{ scale: 1.04 }}
+          >
             <p className="text-sm text-gray-400">{hero.role}</p>
             <p className="font-bold text-white mt-1">{hero.experienceBadge}</p>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

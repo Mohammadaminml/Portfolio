@@ -5,9 +5,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 import { cardReveal, fadeUp, stagger, viewport } from "../animations/motion";
 
 export default function Publications() {
-  const { content, language } = useLanguage();
-  const formatYear = (year) =>
-    language === "fa" ? new Intl.NumberFormat("fa-IR").format(Number(year)) : year;
+  const { content } = useLanguage();
   return (
     <section id="publications" className="py-32">
       <div className="max-w-6xl mx-auto px-6">
@@ -26,7 +24,7 @@ export default function Publications() {
               whileHover={{ y: -10, scale: 1.02 }}
               className="glass publication-card p-7 rounded-[30px] flex flex-col"
             >
-              <p className="text-blue-400 text-sm mb-4">{formatYear(item.date)}</p>
+              <p className="text-blue-400 text-sm mb-4">{item.date}</p>
 
               <h3 className="text-xl font-bold leading-relaxed">
                 {title}

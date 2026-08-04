@@ -8,7 +8,7 @@ import { cardReveal, fadeUp, stagger, viewport } from "../animations/motion";
 const serviceIcons = [FaLayerGroup, FaCode, FaBrain];
 
 export default function Home() {
-  const { content, language } = useLanguage();
+  const { content } = useLanguage();
   const { home } = content;
 
   return (
@@ -87,7 +87,7 @@ export default function Home() {
             </div>
             <Link to="/projects" className="home-text-link">
               {home.projects.viewAll}
-              <FaArrowRight className={language === "fa" ? "rotate-180" : ""} />
+              <FaArrowRight />
             </Link>
           </motion.div>
 

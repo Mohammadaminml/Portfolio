@@ -3,7 +3,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 import { fadeUp, viewport } from "../animations/motion";
 
 export default function Experience() {
-  const { content, language } = useLanguage();
+  const { content } = useLanguage();
   return (
     <section className="py-32" id="experience">
       <div className="max-w-6xl mx-auto px-6">
@@ -12,25 +12,25 @@ export default function Experience() {
           {content.experience.title}
         </motion.h2>
 
-        <div className={`relative ${language === "fa" ? "border-r mr-4" : "border-l ml-4"} border-white/10`}>
+        <div className="relative border-l ml-4 border-white/10">
 
           {content.experience.items.map(([title, company, year], index) => (
             <motion.div
               key={title}
-              initial={{ opacity: 0, x: language === "fa" ? 45 : -45 }}
+              initial={{ opacity: 0, x: -45 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={viewport}
               transition={{ duration: .6, delay: index * .1, ease: [0.22, 1, 0.36, 1] }}
-              className={language === "fa" ? "mb-12 mr-8" : "mb-12 ml-8"}
+              className="mb-12 ml-8"
             >
 
               <motion.div
-                className={`timeline-dot absolute w-4 h-4 rounded-full mt-2 ${language === "fa" ? "-right-2" : "-left-2"}`}
+                className="timeline-dot absolute w-4 h-4 rounded-full mt-2 -left-2"
                 whileInView={{ scale: [0, 1.35, 1] }}
                 viewport={viewport}
               />
 
-              <motion.div whileHover={{ x: language === "fa" ? -6 : 6 }} className="glass accent-card p-6 rounded-3xl">
+              <motion.div whileHover={{ x: 6 }} className="glass accent-card p-6 rounded-3xl">
                 <h3 className="text-2xl font-bold">
                   {title}
                 </h3>
