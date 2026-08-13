@@ -16,7 +16,7 @@
     <meta property="og:title" content="محمدامین ملاکاظمی‌ها | مهندس نرم‌افزار و توسعه‌دهنده فول‌استک" />
     <meta property="og:description" content="وب‌سایت رسمی محمدامین ملاکاظمی‌ها؛ معرفی سوابق، پروژه‌ها، مقالات و راه‌های ارتباطی." />
     <meta property="og:url" content="https://mohammadaminmollakazemiha.ir/" />
-    <meta property="og:image" content="https://mohammadaminmollakazemiha.ir/profile.png" />
+    <meta property="og:image" content="https://mohammadaminmollakazemiha.ir/profile.webp" />
     <meta property="og:image:alt" content="تصویر محمدامین ملاکاظمی‌ها" />
     <meta property="profile:first_name" content="محمدامین" />
     <meta property="profile:last_name" content="ملاکاظمی‌ها" />
@@ -24,10 +24,9 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="محمدامین ملاکاظمی‌ها | مهندس نرم‌افزار" />
     <meta name="twitter:description" content="وب‌سایت رسمی محمدامین ملاکاظمی‌ها، توسعه‌دهنده فول‌استک و سازنده محصول." />
-    <meta name="twitter:image" content="https://mohammadaminmollakazemiha.ir/profile.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Estedad:wght@500;600;700;800;900&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <meta name="twitter:image" content="https://mohammadaminmollakazemiha.ir/profile.webp" />
+    <link rel="preload" href="/fonts/vazirmatn-arabic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/estedad-arabic.woff2" as="font" type="font/woff2" crossorigin />
     <title>محمدامین ملاکاظمی‌ها | مهندس نرم‌افزار و توسعه‌دهنده فول‌استک</title>
     <script type="application/ld+json">
       {
@@ -43,7 +42,7 @@
           "Mohammadamin Mollakazemiha"
         ],
         "url": "https://mohammadaminmollakazemiha.ir/",
-        "image": "https://mohammadaminmollakazemiha.ir/profile.png",
+        "image": "https://mohammadaminmollakazemiha.ir/profile.webp",
         "jobTitle": "مهندس نرم‌افزار و توسعه‌دهنده فول‌استک",
         "description": "مهندس نرم‌افزار، توسعه‌دهنده فول‌استک و سازنده محصول دیجیتال",
         "knowsAbout": ["مهندسی نرم‌افزار", "توسعه وب", "React", "Django", "Python", "هوش مصنوعی"],
@@ -58,6 +57,13 @@
     </script>
   </head>
   <body>
+    <script>
+      const redirect = sessionStorage.getItem("spa-redirect");
+      if (redirect) {
+        sessionStorage.removeItem("spa-redirect");
+        history.replaceState(null, "", redirect);
+      }
+    </script>
     <div id="root">
       <main>
         <h1>محمدامین ملاکاظمی‌ها</h1>

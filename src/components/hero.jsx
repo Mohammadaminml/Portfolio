@@ -72,8 +72,12 @@ export default function Hero() {
           <div className="portrait-grid absolute -inset-5 rounded-[48px]" />
 
           <img
-            src={`${import.meta.env.BASE_URL}profile.png`}
+            src={`${import.meta.env.BASE_URL}profile.webp`}
             alt={hero.imageAlt}
+            width="600"
+            height="600"
+            fetchPriority="high"
+            decoding="async"
             className="hero-portrait relative rounded-[36px] w-full max-w-md mx-auto"
           />
           <motion.div

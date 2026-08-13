@@ -22,7 +22,7 @@ export default function ScrollTop() {
       onClick={() =>
         window.scrollTo({
           top: 0,
-          behavior: "smooth",
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
         })
       }
       aria-label={content.accessibility.scrollTop}

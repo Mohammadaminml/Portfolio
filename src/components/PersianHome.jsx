@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FaArrowLeft, FaCheck, FaCode, FaLayerGroup, FaBrain } from "react-icons/fa6";
+import { FaArrowLeft, FaBookOpen, FaCheck, FaCode, FaGithub, FaLayerGroup, FaBrain, FaLinkedinIn } from "react-icons/fa6";
 import products, { localizeProduct } from "../data/products";
 import ProductVisual from "./ProductVisual";
 import { cardReveal, fadeUp, stagger, viewport } from "../animations/motion";
@@ -9,6 +9,13 @@ const capabilities = [
   [FaLayerGroup, "طراحی تجربه محصول", "از ساختار صفحات تا جزئی‌ترین تعامل‌ها؛ تجربه‌ای که کاربر با آن ارتباط می‌گیرد."],
   [FaCode, "مهندسی فول‌استک", "رابط سریع، بک‌اند مطمئن و معماری‌ای که همراه کسب‌وکار شما رشد می‌کند."],
   [FaBrain, "هوش مصنوعی کاربردی", "هوشمندسازی فرایندها با راهکارهایی که در دنیای واقعی قابل استفاده‌اند."],
+];
+
+const trustSignals = [
+  { Icon: FaLayerGroup, label: "پروژه‌ها", title: "فرایند، تصمیم و خروجی", text: "Case Studyهایی که فقط ابزارها را نام نمی‌برند و مسیر حل مسئله را هم نشان می‌دهند.", href: "/projects", action: "مشاهده پروژه‌ها" },
+  { Icon: FaBookOpen, label: "پژوهش", title: "۳ مقاله منتشرشده", text: "فعالیت پژوهشی در هوش مصنوعی، شبکه‌های آینده، بلاکچین و سامانه‌های هوشمند.", href: "/publications", action: "بررسی مقالات" },
+  { Icon: FaGithub, label: "کد و فعالیت فنی", title: "پروفایل عمومی GitHub", text: "مخازن، تجربه‌های فنی و بخشی از مسیر ساخت محصولات در یک پروفایل قابل بررسی.", href: "https://github.com/Mohammadaminml", external: true, action: "رفتن به GitHub" },
+  { Icon: FaLinkedinIn, label: "سابقه حرفه‌ای", title: "پروفایل LinkedIn", text: "نمایی عمومی از مسیر حرفه‌ای، تخصص‌ها و ارتباطات کاری برای ارزیابی دقیق‌تر همکاری.", href: "https://www.linkedin.com/in/mohammad-amin-mollakazemiha-52a3a2201", external: true, action: "رفتن به LinkedIn" },
 ];
 
 export default function PersianHome() {
@@ -30,7 +37,7 @@ export default function PersianHome() {
           </motion.div>
 
           <motion.div initial={{ opacity:0, scale:.92, rotate:2 }} animate={{ opacity:1, scale:1, rotate:0 }} transition={{ duration:.9 }} className="fa-hero-stage">
-            <div className="fa-portrait-frame"><img src={`${import.meta.env.BASE_URL}profile.png`} alt="محمدامین ملاکاظمی‌ها" /></div>
+            <div className="fa-portrait-frame"><img src={`${import.meta.env.BASE_URL}profile.webp`} alt="محمدامین ملاکاظمی‌ها" width="600" height="600" fetchPriority="high" decoding="async" /></div>
             <div className="fa-floating-card fa-float-code"><span>پروژه‌های تحویل‌شده</span><strong>+۶۰</strong></div>
             <div className="fa-floating-card fa-float-exp"><span>تجربه حرفه‌ای</span><strong>+۶ سال</strong></div>
             <div className="fa-stage-label">طراحی <i /> توسعه <i /> محصول</div>
@@ -68,6 +75,22 @@ export default function PersianHome() {
               {capabilities.map(([Icon,title,text],index) => <motion.article variants={cardReveal} key={title}><b>۰{index+1}</b><span><Icon /></span><div><h3>{title}</h3><p>{text}</p></div></motion.article>)}
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      <section className="fa-trust py-28" aria-labelledby="trust-title">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewport} className="fa-trust-head">
+            <div><span>اعتماد در عمل</span><h2 id="trust-title">قبل از همکاری،<br /><em>خودت بررسی کن.</em></h2></div>
+            <p>اعتماد با چند جمله تبلیغاتی ساخته نمی‌شود. اینجا مسیرهایی را می‌بینی که تجربه فنی، خروجی‌ها و فعالیت حرفه‌ای من را قابل بررسی می‌کنند.</p>
+          </motion.div>
+          <motion.div variants={stagger} initial="hidden" whileInView="visible" viewport={viewport} className="fa-trust-grid">
+            {trustSignals.map(({ Icon, label, title, text, href, external, action }, index) => {
+              const content = <><div className="fa-trust-icon"><Icon /></div><span>۰{index + 1} / {label}</span><h3>{title}</h3><p>{text}</p><b>{action} <FaArrowLeft /></b></>;
+              return external ? <motion.a variants={cardReveal} key={title} href={href} target="_blank" rel="noreferrer" aria-label={`${action}؛ در پنجره جدید`}>{content}</motion.a> : <motion.div variants={cardReveal} key={title}><Link to={href}>{content}</Link></motion.div>;
+            })}
+          </motion.div>
+          <div className="fa-trust-note"><FaCheck /><p><strong>شفافیت مهم‌تر از نمایش است.</strong> نظر مشتری تنها با متن واقعی و اجازه انتشار نام یا شرکت در سایت قرار می‌گیرد.</p></div>
         </div>
       </section>
 

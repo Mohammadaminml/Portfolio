@@ -6,6 +6,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ScrollTop from "./ScrollTop";
 import { useLanguage } from "../i18n/LanguageContext";
+import RouteSeo from "./RouteSeo";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -17,11 +18,15 @@ export default function Layout() {
 
   return (
     <div className={`min-h-screen apple-gradient ${isRtl ? "persian-edition" : ""}`}>
+      <RouteSeo />
+      <a className="skip-link" href="#main-content">رفتن مستقیم به محتوای اصلی</a>
       <div className="site-noise" aria-hidden="true" />
       <BackgroundEffects />
       <Navbar />
       <AnimatePresence mode="wait">
         <motion.main
+          id="main-content"
+          tabIndex="-1"
           key={pathname}
           className="relative z-10"
           initial={{ opacity: 0, y: 12, filter: "blur(5px)" }}

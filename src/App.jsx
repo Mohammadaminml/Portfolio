@@ -15,6 +15,9 @@ const TechStack = lazy(() => import("./components/TechStack"));
 const Contact = lazy(() => import("./components/Contact"));
 const Shop = lazy(() => import("./components/Shop"));
 const ProductDetail = lazy(() => import("./components/ProductDetail"));
+const ProjectDetail = lazy(() => import("./components/ProjectDetail"));
+const Blog = lazy(() => import("./components/Blog"));
+const BlogPost = lazy(() => import("./components/BlogPost"));
 
 const routes = [
   { path: "about", Component: About },
@@ -45,6 +48,9 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="shop" element={<Shop />} />
           <Route path="shop/:slug" element={<ProductDetail />} />
+          <Route path="projects/:slug" element={<ProjectDetail />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="blog/:slug" element={<BlogPost />} />
           {routes.map(({ path, Component }) => (
             <Route key={path} path={path} element={<Component />} />
           ))}

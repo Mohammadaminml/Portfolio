@@ -17,6 +17,7 @@ export const translations = {
       publications: "Publications",
       techStack: "Tech Stack",
       contact: "Contact",
+      blog: "Blog",
       more: "More",
       portfolio: "Mohammad Amin Mollakazemiha",
       openMenu: "Open menu",
@@ -138,7 +139,7 @@ export const translations = {
       home: "خانه", about: "درباره من", skills: "مهارت‌ها", experience: "مسیر حرفه‌ای",
       projects: "پروژه‌ها", shop: "فروشگاه", statistics: "دستاوردها", education: "تحصیلات",
       publications: "مقالات", techStack: "جعبه‌ابزار من",
-      contact: "تماس با من", more: "بیشتر", portfolio: "محمدامین ملاکاظمی‌ها",
+      contact: "تماس با من", blog: "وبلاگ", more: "بیشتر", portfolio: "محمدامین ملاکاظمی‌ها",
       openMenu: "باز کردن منو", closeMenu: "بستن منو",
     },
     hero: {
