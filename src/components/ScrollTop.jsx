@@ -45,7 +45,7 @@ export default function ScrollTop() {
         transition-all
         duration-300
       "
-      style={{ right: "2rem" }}
+      style={{ insetInlineEnd: "2rem" }}
     >
       <FaArrowUp />
     </button>

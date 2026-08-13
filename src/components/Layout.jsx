@@ -5,16 +5,18 @@ import BackgroundEffects from "./BackgroundEffects";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ScrollTop from "./ScrollTop";
+import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Layout() {
   const { pathname } = useLocation();
+  const { isRtl } = useLanguage();
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
   }, [pathname]);
 
   return (
-    <div className="min-h-screen apple-gradient">
+    <div className={`min-h-screen apple-gradient ${isRtl ? "persian-edition" : ""}`}>
       <div className="site-noise" aria-hidden="true" />
       <BackgroundEffects />
       <Navbar />

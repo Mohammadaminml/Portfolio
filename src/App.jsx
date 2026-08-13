@@ -12,8 +12,9 @@ const CounterStats = lazy(() => import("./components/CounterStats"));
 const Education = lazy(() => import("./components/Education"));
 const Publications = lazy(() => import("./components/Publications"));
 const TechStack = lazy(() => import("./components/TechStack"));
-const GithubActivity = lazy(() => import("./components/GithubActivity"));
 const Contact = lazy(() => import("./components/Contact"));
+const Shop = lazy(() => import("./components/Shop"));
+const ProductDetail = lazy(() => import("./components/ProductDetail"));
 
 const routes = [
   { path: "about", Component: About },
@@ -24,7 +25,6 @@ const routes = [
   { path: "education", Component: Education },
   { path: "publications", Component: Publications },
   { path: "tech-stack", Component: TechStack },
-  { path: "github", Component: GithubActivity },
   { path: "contact", Component: Contact },
 ];
 
@@ -43,6 +43,8 @@ export default function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="shop" element={<Shop />} />
+          <Route path="shop/:slug" element={<ProductDetail />} />
           {routes.map(({ path, Component }) => (
             <Route key={path} path={path} element={<Component />} />
           ))}

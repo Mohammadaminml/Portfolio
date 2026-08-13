@@ -3,7 +3,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 import { fadeUp, viewport } from "../animations/motion";
 
 export default function Experience() {
-  const { content } = useLanguage();
+  const { content, isRtl } = useLanguage();
   return (
     <section className="py-32" id="experience">
       <div className="max-w-6xl mx-auto px-6">
@@ -17,7 +17,7 @@ export default function Experience() {
           {content.experience.items.map(([title, company, year], index) => (
             <motion.div
               key={title}
-              initial={{ opacity: 0, x: -45 }}
+              initial={{ opacity: 0, x: isRtl ? 45 : -45 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={viewport}
               transition={{ duration: .6, delay: index * .1, ease: [0.22, 1, 0.36, 1] }}
@@ -30,7 +30,7 @@ export default function Experience() {
                 viewport={viewport}
               />
 
-              <motion.div whileHover={{ x: 6 }} className="glass accent-card p-6 rounded-3xl">
+              <motion.div whileHover={{ x: isRtl ? -6 : 6 }} className="glass accent-card p-6 rounded-3xl">
                 <h3 className="text-2xl font-bold">
                   {title}
                 </h3>

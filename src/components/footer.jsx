@@ -3,7 +3,7 @@ import { useLanguage } from "../i18n/LanguageContext";
 export default function Footer() {
   const { content } = useLanguage();
   return (
-    <footer className="border-t border-white/10 py-10">
+    <footer className="site-footer py-10">
       <div className="max-w-7xl mx-auto px-6 text-center">
         <h3 className="text-2xl font-bold">
           {content.footer.name}

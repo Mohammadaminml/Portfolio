@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useLanguage } from "../i18n/LanguageContext";
 
 export default function Hero() {
-  const { content } = useLanguage();
+  const { content, language } = useLanguage();
   const { hero } = content;
   return (
     <section
@@ -16,23 +16,19 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/8 px-4 py-2 text-sm text-emerald-300 mb-7">
+          <div className="availability inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm mb-7">
             <span className="status-dot" />
             {hero.availability}
           </div>
 
-          <p className="text-blue-400 font-medium tracking-wide mb-4">
-            {hero.eyebrow}
-          </p>
+          <p className="hero-eyebrow font-medium tracking-wide mb-4">{language === "fa" ? "مهندس نرم‌افزار  •  بنیان‌گذار برند MohammadAminTech" : "DEVELOPER · FOUNDER OF MOHAMMADAMINTECH"}</p>
 
-          <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] text-white max-w-[700px]">
-            {hero.firstName}
-            <br />
-            {hero.lastName}
+          <h1 className="hero-title text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] max-w-[700px]">
+            {language === "fa" ? <>ایده‌ها را به<br /><em>محصول واقعی</em> تبدیل می‌کنم.</> : <>I build products<br />for the <em>digital world.</em></>}
           </h1>
 
-          <p className="mt-7 text-gray-400 text-lg md:text-xl leading-8 max-w-xl">
-            {hero.description}
+          <p className="hero-description mt-7 text-lg md:text-xl leading-8 max-w-xl">
+            {language === "fa" ? `من ${hero.firstName} هستم؛ توسعه‌دهنده فول‌استک. به کسب‌وکارها کمک می‌کنم ایده‌هایشان را به نرم‌افزارهای سریع، زیبا و قابل توسعه تبدیل کنند.` : `I’m ${hero.firstName}, a full-stack developer creating thoughtful software, practical developer tools, and digital resources.`}
           </p>
 
           <div className="flex flex-wrap gap-3 mt-8">
@@ -40,7 +36,7 @@ export default function Hero() {
               (item) => (
                 <span
                   key={item}
-                  className="tech-pill px-4 py-2 rounded-full text-sm text-gray-200"
+                  className="tech-pill px-4 py-2 rounded-full text-sm"
                 >
                   {item}
                 </span>
@@ -50,18 +46,18 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-4 mt-10">
             <Link
-              to="/projects"
+              to="/shop"
               className="primary-button px-8 py-3.5 rounded-full font-semibold text-white inline-flex items-center gap-2"
             >
-              {hero.projects}
+              {language === "fa" ? "دیدن محصولات" : "Explore products"}
               <span aria-hidden="true">→</span>
             </Link>
 
             <Link
-              to="/contact"
-              className="secondary-button px-8 py-3.5 rounded-full font-semibold text-white inline-block"
+              to="/experience"
+              className="secondary-button px-8 py-3.5 rounded-full font-semibold inline-block"
             >
-              {hero.contact}
+              {language === "fa" ? "آشنایی با مسیر حرفه‌ای من" : "View my résumé"}
             </Link>
           </div>
         </motion.div>
@@ -86,8 +82,8 @@ export default function Hero() {
             transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
             whileHover={{ scale: 1.04 }}
           >
-            <p className="text-sm text-gray-400">{hero.role}</p>
-            <p className="font-bold text-white mt-1">{hero.experienceBadge}</p>
+            <p className="badge-label text-sm">{language === "fa" ? "تجربه حرفه‌ای" : "Experience"}</p>
+            <p className="font-bold mt-1">{hero.experienceBadge}</p>
           </motion.div>
         </motion.div>
       </div>
