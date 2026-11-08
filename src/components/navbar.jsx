@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import {
   FaBars,
   FaGithub,
-  FaInstagram,
+  //FaInstagram,
   FaLinkedin,
   FaTelegram,
   FaXmark,
@@ -126,9 +126,6 @@ export default function Navbar() {
           <a href="https://t.me/MohammadAminTech" target="_blank" rel="noreferrer" aria-label="Telegram">
             <FaTelegram />
           </a>
-          <a href="https://www.instagram.com/mohammadamin_tech" target="_blank" rel="noreferrer" aria-label="Instagram">
-            <FaInstagram />
-          </a>
           <a href="https://www.linkedin.com/in/mohammad-amin-mollakazemiha-52a3a2201" target="_blank" rel="noreferrer" aria-label="LinkedIn">
             <FaLinkedin />
           </a>
@@ -181,9 +178,6 @@ export default function Navbar() {
             <a href="https://t.me/MohammadAminTech" target="_blank" rel="noreferrer" aria-label="Telegram">
               <FaTelegram />
             </a>
-            <a href="https://www.instagram.com/mohammadamin_tech" target="_blank" rel="noreferrer" aria-label="Instagram">
-              <FaInstagram />
-            </a>
             <a href="https://www.linkedin.com/in/mohammad-amin-mollakazemiha-52a3a2201" target="_blank" rel="noreferrer" aria-label="LinkedIn">
               <FaLinkedin />
             </a>
@@ -197,3 +191,11 @@ export default function Navbar() {
     </nav>
   );
 }
+
+/*<a href="https://www.instagram.com/mohammadamin_tech" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <FaInstagram />
+          </a>*/
+
+/*<a href="https://www.instagram.com/mohammadamin_tech" target="_blank" rel="noreferrer" aria-label="Instagram">
+              <FaInstagram />
+            </a>*/

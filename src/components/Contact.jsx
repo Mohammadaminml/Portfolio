@@ -9,7 +9,7 @@ const contactLinks = [
   ["Telegram", "https://t.me/MohammadAminTech", FaTelegram],
   ["LinkedIn", "https://www.linkedin.com/in/mohammad-amin-mollakazemiha-52a3a2201", FaLinkedin],
   ["GitHub", "https://github.com/Mohammadaminml", FaGithub],
-  ["Instagram", "https://www.instagram.com/mohammadamin_tech", FaInstagram],
+  //["Instagram", "https://www.instagram.com/mohammadamin_tech", FaInstagram],
 ];
 
 const projectTypes = ["طراحی و توسعه محصول", "وب‌سایت یا فروشگاه", "بک‌اند و API", "هوش مصنوعی", "مشاوره فنی", "سایر"];
