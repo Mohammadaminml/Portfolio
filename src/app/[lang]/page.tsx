@@ -251,7 +251,7 @@ export default async function HomePage({
               />
             </div>
 
-            <div className="absolute top-6 start-0 z-20 rounded-2xl border border-(--border) bg-(--surface)/90 px-4 py-3 shadow-lg backdrop-blur-md">
+            <div className="absolute top-12 start-2 z-20 rounded-2xl border border-(--border) bg-(--surface)/95 px-4 py-3 shadow-xl backdrop-blur-md sm:-start-6 sm:top-16">
               <span className="block text-[11px] text-(--text-muted)">
                 {isFa ? "پروژه‌های تحویل‌شده" : "Delivered Projects"}
               </span>
@@ -260,7 +260,7 @@ export default async function HomePage({
               </strong>
             </div>
 
-            <div className="absolute bottom-6 end-0 z-20 rounded-2xl border border-(--border) bg-(--surface)/90 px-4 py-3 shadow-lg backdrop-blur-md">
+            <div className="absolute -bottom-4 end-2 z-20 rounded-2xl border border-(--border) bg-(--surface)/95 px-4 py-3 shadow-xl backdrop-blur-md sm:-end-6 sm:bottom-8">
               <span className="block text-[11px] text-(--text-muted)">
                 {isFa ? "تجربه حرفه‌ای" : "Experience"}
               </span>

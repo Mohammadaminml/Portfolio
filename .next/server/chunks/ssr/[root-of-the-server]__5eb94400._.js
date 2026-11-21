@@ -1726,7 +1726,7 @@ async function HomePage({ params }) {
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "absolute top-6 start-0 z-20 rounded-2xl border border-(--border) bg-(--surface)/90 px-4 py-3 shadow-lg backdrop-blur-md",
+                                        className: "absolute top-12 start-2 z-20 rounded-2xl border border-(--border) bg-(--surface)/95 px-4 py-3 shadow-xl backdrop-blur-md sm:-start-6 sm:top-16",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "block text-[11px] text-(--text-muted)",
@@ -1751,7 +1751,7 @@ async function HomePage({ params }) {
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "absolute bottom-6 end-0 z-20 rounded-2xl border border-(--border) bg-(--surface)/90 px-4 py-3 shadow-lg backdrop-blur-md",
+                                        className: "absolute -bottom-4 end-2 z-20 rounded-2xl border border-(--border) bg-(--surface)/95 px-4 py-3 shadow-xl backdrop-blur-md sm:-end-6 sm:bottom-8",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "block text-[11px] text-(--text-muted)",
