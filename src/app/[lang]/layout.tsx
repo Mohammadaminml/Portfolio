@@ -1,42 +1,15 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import { notFound } from "next/navigation";
-import "../globals.css";
-import { Footer } from "@/components/Footer";
-import { JsonLd } from "@/components/JsonLd";
-import { Navbar } from "@/components/Navbar";
-import { getDictionary, getDirection, isValidLocale } from "@/lib/i18n";
-import { buildMetadata, getPersonAndWebsiteJsonLd } from "@/lib/seo";
-import { SUPPORTED_LOCALES } from "@/types/site";
+import "@/app/globals.css";
 import { AiAssistant } from "@/components/AiAssistant";
-
-const vazirmatn = localFont({
-  src: "../../../public/fonts/vazirmatn-arabic.woff2",
-  variable: "--font-vazirmatn",
-  display: "swap",
-  preload: true,
-});
-
-const estedad = localFont({
-  src: "../../../public/fonts/estedad-arabic.woff2",
-  variable: "--font-estedad",
-  display: "swap",
-  preload: true,
-});
-
-const THEME_INIT_SCRIPT = `
-  (function() {
-    try {
-      var saved = localStorage.getItem('theme');
-      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var theme = saved || (prefersDark ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-    } catch (e) {}
-  })();
-`;
+import { Footer } from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
+import { ScrollTop } from "@/components/ScrollTop";
+import { isValidLocale } from "@/lib/i18n";
+import { buildMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
-  return SUPPORTED_LOCALES.map((lang) => ({ lang }));
+  return [{ lang: "fa" }, { lang: "en" }];
 }
 
 export async function generateMetadata({
@@ -46,10 +19,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang } = await params;
   if (!isValidLocale(lang)) return {};
-  return buildMetadata({ locale: lang });
+
+  return buildMetadata({
+    locale: lang,
+    path: "",
+    title:
+      lang === "fa"
+        ? "محمدامین ملاکاظمی‌ها | مهندس نرم‌افزار و توسعه‌دهنده فول‌استک"
+        : "Mohammadamin Mollakazemiha | Full Stack Developer",
+  });
 }
 
-export default async function RootLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: {
@@ -59,34 +40,36 @@ export default async function RootLayout({
   const { lang } = await params;
   if (!isValidLocale(lang)) notFound();
 
-  const dir = getDirection(lang);
-  const dict = getDictionary(lang);
-  const jsonLd = getPersonAndWebsiteJsonLd(lang);
+  const isFa = lang === "fa";
 
   return (
     <html
       lang={lang}
-      dir={dir}
+      dir={isFa ? "rtl" : "ltr"}
+      data-theme="light"
       suppressHydrationWarning
-      className={`${vazirmatn.variable} ${estedad.variable}`}
     >
-      <head>
-        <link rel="icon" type="image/jpeg" href="/favicon.jpg" />
-        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
-        <JsonLd data={jsonLd} />
-      </head>
-      <body className="flex min-h-screen flex-col antialiased">
+      <body className="flex min-h-screen flex-col bg-[var(--bg)] text-[var(--text)] antialiased">
+        {/* Accessibility Skip Link */}
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:start-4 focus:z-50 focus:rounded-md focus:bg-[var(--accent)] focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:start-4 focus:z-[100] focus:rounded-xl focus:bg-[var(--accent)] focus:px-4 focus:py-2.5 focus:text-sm focus:font-bold focus:text-white focus:shadow-lg"
         >
-          {dict.accessibility.skipToContent}
+          {isFa ? "رفتن مستقیم به محتوای اصلی" : "Skip to main content"}
         </a>
-        <Navbar locale={lang} dict={dict} />
-        <main id="main-content" className="flex-1">
+
+        <Navbar locale={lang} />
+
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="relative z-10 flex-1 outline-none"
+        >
           {children}
         </main>
+
         <Footer locale={lang} />
+        <ScrollTop locale={lang} />
         <AiAssistant locale={lang} />
       </body>
     </html>

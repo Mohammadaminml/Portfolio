@@ -1,16 +1,17 @@
-# React + Vite
+# Mohammadamin Mollakazemiha — Full-Stack & AI Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Production-grade bilingual (Persian RTL / English LTR) full-stack portfolio built with **Next.js (App Router)**, **TypeScript**, **Tailwind CSS v4**, **Django REST Framework**, **PostgreSQL**, **Docker**, and a **RAG-powered Streaming AI Assistant**.
 
-Currently, two official plugins are available:
+🌐 **Live Site:** [https://mohammadaminmollakazemiha.ir](https://mohammadaminmollakazemiha.ir)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Architecture
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```mermaid
+flowchart LR
+    User["Browser (FA RTL / EN LTR)"] --> Nginx["Nginx Reverse Proxy\n(HTTPS, CSP, HSTS, SSE)"]
+    Nginx -->|"/"| Next["Next.js 15 (SSG/SSR)\nTypeScript + Tailwind v4"]
+    Nginx -->|"/api/* & /admin/*"| Django["Django REST Framework\nJWT, Throttling, OpenAPI"]
+    Django --> DB[("PostgreSQL 16")]
+    Django -->|"RAG Context + SSE"| LLM["OpenAI-Compatible LLM\n(with Safe Fallback)"]

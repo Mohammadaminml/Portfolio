@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+Host: https://mohammadaminmollakazemiha.ir
+Sitemap: https://mohammadaminmollakazemiha.ir/sitemap.xml

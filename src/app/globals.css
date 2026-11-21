@@ -1,60 +1,306 @@
 @import "tailwindcss";
 
-:root {
-  --bg: #f8fafc;
+/* Self-hosted Persian typography (Estedad for headings, Vazirmatn for body) */
+@font-face {
+  font-family: "Estedad";
+  src: url("/fonts/estedad-arabic.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FEFC;
+}
+@font-face {
+  font-family: "Estedad";
+  src: url("/fonts/estedad-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 500 900;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/vazirmatn-arabic.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  unicode-range: U+0600-06FF, U+0750-077F, U+0870-088E, U+0890-0891, U+0897-08E1, U+08E3-08FF, U+200C-200E, U+2010-2011, U+204F, U+2E41, U+FB50-FDFF, U+FE70-FEFC;
+}
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("/fonts/vazirmatn-latin.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+
+:root,
+[data-theme="light"] {
+  --bg: #fbfaf7;
   --surface: #ffffff;
-  --surface-muted: #f1f5f9;
-  --text: #0f172a;
-  --text-muted: #475569;
-  --border: #e2e8f0;
-  --accent: #2563eb;
-  --accent-hover: #1d4ed8;
-  --accent-soft: #eff6ff;
+  --surface-muted: #f0ede5;
+  --border: #e3e0da;
+  --text: #0c1d38;
+  --text-muted: #647288;
+  --accent: #ff5c35;
+  --accent-hover: #e04a26;
+  --accent-soft: #fff0eb;
+  --navy: #0c1d38;
+  --blue: #2563eb;
+  color-scheme: light;
 }
 
 [data-theme="dark"] {
-  --bg: #0b1120;
-  --surface: #111827;
-  --surface-muted: #1e293b;
-  --text: #f8fafc;
-  --text-muted: #94a3b8;
-  --border: #1e293b;
-  --accent: #3b82f6;
-  --accent-hover: #60a5fa;
-  --accent-soft: #172554;
+  --bg: #081224;
+  --surface: #0e1d36;
+  --surface-muted: #152847;
+  --border: #1f3559;
+  --text: #f3f6fb;
+  --text-muted: #98a9c4;
+  --accent: #ff6e4a;
+  --accent-hover: #ff5c35;
+  --accent-soft: rgba(255, 92, 53, 0.14);
+  --navy: #0c1d38;
+  --blue: #60a5fa;
+  color-scheme: dark;
 }
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-    background-color: var(--bg);
-    color: var(--text);
-  }
+* {
+  box-sizing: border-box;
+}
 
-  body {
-    font-family: var(--font-vazirmatn), system-ui, -apple-system, sans-serif;
-    background-color: var(--bg);
-    color: var(--text);
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    transition: background-color 150ms ease, color 150ms ease;
-  }
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
 
-  h1, h2, h3, h4 {
-    font-family: var(--font-estedad), var(--font-vazirmatn), sans-serif;
-  }
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
 
-  :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+html[lang="fa"] body {
+  font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
+  font-feature-settings: "ss01", "ss02";
+  line-height: 1.9;
+  letter-spacing: 0;
+}
+
+html[lang="fa"] h1,
+html[lang="fa"] h2,
+html[lang="fa"] h3 {
+  font-family: "Estedad", "Vazirmatn", Tahoma, sans-serif;
+  letter-spacing: 0;
+}
+
+::selection {
+  background: rgba(255, 92, 53, 0.2);
+  color: var(--text);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Flagship Hero */
+.fa-hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(145deg, #f5f1e8 0%, #faf8f3 56%, #e8eff9 100%);
+}
+
+[data-theme="dark"] .fa-hero {
+  background: linear-gradient(145deg, #071020 0%, #0b1930 58%, #102444 100%);
+}
+
+.fa-hero-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.55;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(255, 92, 53, 0.12) 0 2px, transparent 3px),
+    linear-gradient(rgba(12, 29, 56, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(12, 29, 56, 0.04) 1px, transparent 1px);
+  background-size: 44px 44px, 88px 88px, 88px 88px;
+  mask-image: linear-gradient(to bottom, #000 55%, transparent);
+}
+
+[data-theme="dark"] .fa-hero-pattern {
+  background-image:
+    radial-gradient(circle at 15% 25%, rgba(255, 92, 53, 0.18) 0 2px, transparent 3px),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+.fa-hero-highlight {
+  position: relative;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.fa-hero-highlight::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -0.15rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: rgba(255, 92, 53, 0.18);
+  transform: rotate(-1.5deg);
+}
+
+.fa-portrait-frame {
+  position: relative;
+  overflow: hidden;
+  border-radius: 48% 48% 24px 24px;
+  background: linear-gradient(160deg, #6e91c5, #d7e0ef);
+  box-shadow: 0 36px 75px rgba(20, 39, 68, 0.22);
+}
+
+.fa-portrait-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0.85rem;
+  z-index: 1;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* Signature asymmetric cards */
+.sig-card {
+  border-radius: 28px 12px 28px 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 0 14px 40px rgba(26, 39, 57, 0.06);
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+}
+
+.sig-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(26, 39, 57, 0.12);
+}
+
+/* Tech Marquee Strip */
+.fa-tech-marquee {
+  overflow: hidden;
+  padding: 1.05rem 0;
+  color: #dce6f5;
+  background: var(--navy);
+  direction: ltr;
+  white-space: nowrap;
+}
+
+.fa-tech-marquee b {
+  color: var(--accent);
+}
+
+/* Navy Dark Block (Capabilities / Resume) */
+.fa-navy-block {
+  background: #0c1d38;
+  color: #ffffff;
+}
+
+/* Status Dot */
+.status-dot {
+  width: 0.52rem;
+  height: 0.52rem;
+  border-radius: 999px;
+  background: #20a66a;
+  box-shadow: 0 0 0 5px rgba(32, 166, 106, 0.14);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  html {
+    scroll-behavior: auto;
   }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+/* Mobile & touch-device refinements */
+@media (max-width: 767px) {
+  body {
+    min-width: 320px;
+  }
+
+  .fa-portrait-frame {
+    border-radius: 42% 42% 20px 20px;
+  }
+
+  .sig-card {
+    border-radius: 22px 10px 22px 10px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .sig-card:hover {
+    transform: none;
+    box-shadow: 0 14px 40px rgba(26, 39, 57, 0.06);
+  }
+}
+.skill-progress-bar {
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), #ff8a6d);
+}
+
+.skill-progress-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: translateX(-100%);
+  animation: skill-shine 2.6s infinite;
+}
+
+@keyframes skill-shine {
+  55%,
+  100% {
+    transform: translateX(110%);
+  }
+}
+@keyframes orb-float-one {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(70px, 45px, 0) scale(1.15);
+  }
+}
+
+@keyframes orb-float-two {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-55px, -70px, 0) scale(1.2);
+  }
+}
+
+.ambient-orb-one {
+  animation: orb-float-one 18s ease-in-out infinite;
+}
+
+.ambient-orb-two {
+  animation: orb-float-two 22s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-orb-one,
+  .ambient-orb-two {
+    animation: none;
+  }
+}
 }

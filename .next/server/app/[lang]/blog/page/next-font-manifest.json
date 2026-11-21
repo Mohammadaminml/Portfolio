@@ -1,0 +1,11 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/src/app/[lang]/blog/page": [
+      "static/media/vazirmatn_arabic-s.p.c041a43b.woff2",
+      "static/media/estedad_arabic-s.p.38595d04.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}
