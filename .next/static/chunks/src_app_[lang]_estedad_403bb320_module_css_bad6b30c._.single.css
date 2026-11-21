@@ -1,0 +1,25 @@
+/* [project]/src/app/[lang]/estedad_403bb320.module.css [app-client] (css) */
+@font-face {
+  font-family: estedad;
+  src: url("../media/estedad_arabic-s.p.38595d04.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: estedad Fallback;
+  src: local(Arial);
+  ascent-override: 102.5%;
+  descent-override: 50.0%;
+  line-gap-override: 0.0%;
+  size-adjust: 100.0%;
+}
+
+.estedad_403bb320-module__WqEFbG__className {
+  font-family: estedad, estedad Fallback;
+}
+
+.estedad_403bb320-module__WqEFbG__variable {
+  --font-estedad: "estedad", "estedad Fallback";
+}
+
+/*# sourceMappingURL=src_app_%5Blang%5D_estedad_403bb320_module_css_bad6b30c._.single.css.map*/

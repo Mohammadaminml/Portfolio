@@ -1,0 +1,25 @@
+/* [project]/src/app/[lang]/vazirmatn_ab2b6a2d.module.css [app-client] (css) */
+@font-face {
+  font-family: vazirmatn;
+  src: url("../media/vazirmatn_arabic-s.p.c041a43b.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: vazirmatn Fallback;
+  src: local(Arial);
+  ascent-override: 102.54%;
+  descent-override: 53.71%;
+  line-gap-override: 0.0%;
+  size-adjust: 100.0%;
+}
+
+.vazirmatn_ab2b6a2d-module__KzL39G__className {
+  font-family: vazirmatn, vazirmatn Fallback;
+}
+
+.vazirmatn_ab2b6a2d-module__KzL39G__variable {
+  --font-vazirmatn: "vazirmatn", "vazirmatn Fallback";
+}
+
+/*# sourceMappingURL=src_app_%5Blang%5D_vazirmatn_ab2b6a2d_module_css_bad6b30c._.single.css.map*/
