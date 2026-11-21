@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/app/[lang]/estedad_403bb320.module.css"],"sourcesContent":["@font-face {\n    font-family: 'estedad';\n    src: url('@vercel/turbopack-next/internal/font/local/font?{%22path%22:%22../../../public/fonts/estedad-arabic.woff2%22,%22preload%22:true,%22has_size_adjust%22:true}') format('woff2');\n    font-display: swap;\n    \n}\n\n@font-face {\n    font-family: 'estedad Fallback';\n    src: local(\"Arial\");\n    ascent-override: 102.50%;\ndescent-override: 50.00%;\nline-gap-override: 0.00%;\nsize-adjust: 100.00%;\n\n}\n\n.className {\n    font-family: 'estedad', 'estedad Fallback';\n    \n}\n.variable {\n    --font-estedad: 'estedad', 'estedad Fallback';\n}\n\n"],"names":[],"mappings":"AAAA;;;;;;AAOA;;;;;;;;;AAUA;;;;AAIA"}}]
-}
