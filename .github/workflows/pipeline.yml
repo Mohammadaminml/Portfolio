@@ -1,4 +1,4 @@
-name: Build, Test & Deploy
+name: CI/CD Pipeline
 
 on:
   push:
@@ -17,7 +17,6 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # مرحله ۱: لینت، تایپ‌چک و بیلد استاتیک
   build:
     name: 1. Build
     runs-on: ubuntu-latest
@@ -50,7 +49,6 @@ jobs:
         with:
           path: ./out
 
-  # مرحله ۲: اجرای تست‌های E2E با Playwright
   test:
     name: 2. Test (E2E)
     runs-on: ubuntu-latest
@@ -83,7 +81,6 @@ jobs:
           path: playwright-report/
           retention-days: 7
 
-  # مرحله ۳: دیپلوی روی GitHub Pages (فقط روی برنچ main یا اجرای دستی)
   deploy:
     name: 3. Deploy to Pages
     runs-on: ubuntu-latest
