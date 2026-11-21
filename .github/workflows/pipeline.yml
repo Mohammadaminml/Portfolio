@@ -42,7 +42,10 @@ jobs:
       - name: Build Next.js for GitHub Pages
         env:
           GITHUB_PAGES: "true"
-        run: npm run build
+        run: |
+          npm run build
+          cp public/index.html out/index.html
+
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
