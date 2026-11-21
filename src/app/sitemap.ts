@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/seo";
 import { SUPPORTED_LOCALES } from "@/types/site";
 
+export const dynamic = "force-static";
+
 const STATIC_ROUTES = [
   "",
   "/about",
