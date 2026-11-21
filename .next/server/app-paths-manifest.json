@@ -1,8 +1,1 @@
-{
-  "/[lang]/blog/page": "app/[lang]/blog/page.js",
-  "/[lang]/contact/page": "app/[lang]/contact/page.js",
-  "/[lang]/page": "app/[lang]/page.js",
-  "/[lang]/projects/[slug]/page": "app/[lang]/projects/[slug]/page.js",
-  "/[lang]/projects/page": "app/[lang]/projects/page.js",
-  "/[lang]/shop/page": "app/[lang]/shop/page.js"
-}
+{}

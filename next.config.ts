@@ -1,11 +1,12 @@
 import type { NextConfig } from "next";
 
+const isGitHubPages = process.env.GITHUB_PAGES === "true";
+
 const nextConfig: NextConfig = {
-  // خروجی standalone برای Docker در فاز ۵؛ در حالت dev و build استاندارد هم کامل کار می‌کند
-  output: "standalone",
-  images: {
-    formats: ["image/avif", "image/webp"],
-  },
+  output: isGitHubPages ? "export" : "standalone",
+  images: isGitHubPages
+    ? { unoptimized: true }
+    : { formats: ["image/avif", "image/webp"] },
   poweredByHeader: false,
 };
 
