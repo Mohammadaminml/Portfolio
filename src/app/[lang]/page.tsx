@@ -13,6 +13,7 @@ import {
   FaLayerGroup,
   FaLinkedinIn,
 } from "react-icons/fa6";
+import { AboutSection } from "@/components/AboutSection";
 import { EducationSection } from "@/components/EducationSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
 import { ProductVisual } from "@/components/ProductVisual";
@@ -21,7 +22,6 @@ import { SkillsSection } from "@/components/SkillsSection";
 import { TechStackSection } from "@/components/TechStackSection";
 import { localizeProduct, products } from "@/data/products";
 import { isValidLocale } from "@/lib/i18n";
-import { AboutSection } from "@/components/AboutSection";
 
 interface CapabilityItem {
   Icon: IconType;
@@ -184,7 +184,7 @@ export default async function HomePage({
         <div className="fa-hero-pattern" aria-hidden="true" />
         <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-6 py-16 lg:grid-cols-[1.08fr_0.92fr] lg:py-24">
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-emerald-600/20 bg-[var(--surface)]/80 px-4 py-1.5 text-xs font-semibold text-emerald-700 backdrop-blur-sm dark:text-emerald-400">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-emerald-600/20 bg-(--surface)/80 px-4 py-1.5 text-xs font-semibold text-emerald-700 backdrop-blur-sm dark:text-emerald-400">
               <span className="status-dot" />
               <span>
                 {isFa
@@ -193,7 +193,7 @@ export default async function HomePage({
               </span>
             </div>
 
-            <p className="text-xs font-bold text-[var(--text-muted)]">
+            <p className="text-xs font-bold text-(--text-muted)">
               {isFa
                 ? "محمدامین ملاکاظمی‌ها / مهندس نرم‌افزار / بنیان‌گذار برند MohammadAminTech"
                 : "Mohammadamin Mollakazemiha / Software Engineer / Founder of MohammadAminTech"}
@@ -215,23 +215,23 @@ export default async function HomePage({
               )}
             </h1>
 
-            <p className="max-w-xl text-sm leading-loose text-[var(--text-muted)] sm:text-base">
+            <p className="max-w-xl text-sm leading-loose text-(--text-muted) sm:text-base">
               {isFa
                 ? "محصول دیجیتال فقط مجموعه‌ای از کدها نیست؛ باید زیبا باشد، سریع کار کند و یک مسئله واقعی را حل کند. من دقیقاً همین‌جا وارد می‌شوم."
                 : "A digital product isn't just lines of code—it should look sharp, run fast, and solve a real problem. That's where I come in."}
             </p>
 
             <div className="flex flex-wrap items-center gap-3 pt-2">
-              <a
-                href="#contact"
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--navy)] px-6 py-3.5 text-sm font-extrabold text-white shadow-lg transition-transform hover:-translate-y-0.5 dark:bg-[var(--accent)]"
+              <Link
+                href={`/${lang}/contact`}
+                className="inline-flex items-center gap-2 rounded-full bg-(--navy) px-6 py-3.5 text-sm font-extrabold text-white shadow-lg transition-transform hover:-translate-y-0.5 dark:bg-(--accent)"
               >
                 <span>{isFa ? "پروژه‌ات را شروع کن" : "Start a Project"}</span>
                 <ArrowIcon className="h-3.5 w-3.5" />
-              </a>
+              </Link>
               <Link
                 href={`/${lang}/projects`}
-                className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)]/75 px-6 py-3.5 text-sm font-bold text-[var(--text)] backdrop-blur-sm transition-colors hover:bg-[var(--surface)]"
+                className="inline-flex items-center gap-2 rounded-full border border-(--border) bg-(--surface)/75 px-6 py-3.5 text-sm font-bold text-(--text) backdrop-blur-sm transition-colors hover:bg-(--surface)"
               >
                 {isFa ? "نمونه‌کارها را ببین" : "View Projects"}
               </Link>
@@ -251,20 +251,20 @@ export default async function HomePage({
               />
             </div>
 
-            <div className="absolute top-6 start-0 z-20 rounded-2xl border border-[var(--border)] bg-[var(--surface)]/90 px-4 py-3 shadow-lg backdrop-blur-md">
-              <span className="block text-[11px] text-[var(--text-muted)]">
+            <div className="absolute top-6 start-0 z-20 rounded-2xl border border-(--border) bg-(--surface)/90 px-4 py-3 shadow-lg backdrop-blur-md">
+              <span className="block text-[11px] text-(--text-muted)">
                 {isFa ? "پروژه‌های تحویل‌شده" : "Delivered Projects"}
               </span>
-              <strong className="text-xl font-black text-[var(--text)]">
+              <strong className="text-xl font-black text-(--text)">
                 {isFa ? "+۶۰" : "60+"}
               </strong>
             </div>
 
-            <div className="absolute bottom-6 end-0 z-20 rounded-2xl border border-[var(--border)] bg-[var(--surface)]/90 px-4 py-3 shadow-lg backdrop-blur-md">
-              <span className="block text-[11px] text-[var(--text-muted)]">
+            <div className="absolute bottom-6 end-0 z-20 rounded-2xl border border-(--border) bg-(--surface)/90 px-4 py-3 shadow-lg backdrop-blur-md">
+              <span className="block text-[11px] text-(--text-muted)">
                 {isFa ? "تجربه حرفه‌ای" : "Experience"}
               </span>
-              <strong className="text-xl font-black text-[var(--accent)]">
+              <strong className="text-xl font-black text-(--accent)">
                 {isFa ? "+۶ سال" : "6+ yrs"}
               </strong>
             </div>
@@ -288,7 +288,7 @@ export default async function HomePage({
       <section className="mx-auto max-w-6xl px-6 py-24">
         <div className="grid items-end gap-8 lg:grid-cols-[1.15fr_0.85fr]">
           <div>
-            <span className="text-xs font-extrabold text-[var(--accent)]">
+            <span className="text-xs font-extrabold text-(--accent)">
               {isFa ? "۰۱ / فروشگاه" : "01 / SHOP"}
             </span>
             <h2 className="mt-2 text-3xl font-black leading-tight sm:text-5xl">
@@ -296,27 +296,27 @@ export default async function HomePage({
                 <>
                   ابزارهایی برای
                   <br />
-                  <em className="not-italic text-[var(--accent)]">سریع‌تر ساختن.</em>
+                  <em className="not-italic text-(--accent)">سریع‌تر ساختن.</em>
                 </>
               ) : (
                 <>
                   Tools built to help you
                   <br />
-                  <em className="not-italic text-[var(--accent)]">ship faster.</em>
+                  <em className="not-italic text-(--accent)">ship faster.</em>
                 </>
               )}
             </h2>
           </div>
 
           <div className="space-y-4">
-            <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+            <p className="text-sm leading-relaxed text-(--text-muted)">
               {isFa
                 ? "محصولاتی که از دل تجربه واقعی پروژه‌ها بیرون آمده‌اند؛ آماده استفاده، قابل توسعه و همراه با پشتیبانی."
                 : "Resources shaped by real-world production projects—ready to use, extensible, and backed by support."}
             </p>
             <Link
               href={`/${lang}/shop`}
-              className="inline-flex items-center gap-2 border-b-2 border-[var(--accent)] pb-1 text-sm font-extrabold"
+              className="inline-flex items-center gap-2 border-b-2 border-(--accent) pb-1 text-sm font-extrabold"
             >
               <span>{isFa ? "همه محصولات" : "All Products"}</span>
               <ArrowIcon className="h-3.5 w-3.5" />
@@ -334,22 +334,22 @@ export default async function HomePage({
                 <ProductVisual product={product} compact />
               </Link>
               <div className="flex flex-1 flex-col p-5">
-                <span className="w-fit rounded-full border border-[var(--accent)]/20 bg-[var(--accent-soft)] px-2.5 py-0.5 text-xs font-bold text-[var(--accent)]">
+                <span className="w-fit rounded-full border border-(--accent)/20 bg-(--accent-soft) px-2.5 py-0.5 text-xs font-bold text-(--accent)">
                   {product.tag}
                 </span>
                 <strong className="mt-3 text-lg font-extrabold">
                   {product.title}
                 </strong>
-                <p className="mt-2 flex-1 text-xs leading-relaxed text-[var(--text-muted)]">
+                <p className="mt-2 flex-1 text-xs leading-relaxed text-(--text-muted)">
                   {product.description}
                 </p>
-                <div className="mt-5 flex items-center justify-between gap-3 border-t border-[var(--border)] pt-4">
+                <div className="mt-5 flex items-center justify-between gap-3 border-t border-(--border) pt-4">
                   <b className="text-sm font-extrabold tabular-nums">
                     {product.price}
                   </b>
                   <Link
                     href={`/${lang}/shop/${product.slug}`}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-[var(--accent)]/25 bg-[var(--accent-soft)] px-3 py-1.5 text-xs font-bold text-[var(--accent)] transition-colors hover:bg-[var(--accent)] hover:text-white"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-(--accent)/25 bg-(--accent-soft) px-3 py-1.5 text-xs font-bold text-(--accent) transition-colors hover:bg-(--accent) hover:text-white"
                   >
                     <span>{isFa ? "جزئیات" : "Details"}</span>
                     <ArrowIcon className="h-3 w-3" />
@@ -361,7 +361,7 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* 3. Section 02: Capabilities (Navy Block) */}
+      {/* 3. Section 02: Capabilities (از فکر اولیه تا محصول نهایی) */}
       <section className="fa-navy-block relative py-24">
         <div
           aria-hidden="true"
@@ -397,7 +397,7 @@ export default async function HomePage({
             </p>
             <a
               href="#experience"
-              className="inline-flex items-center gap-2 border-b-2 border-[var(--accent)] pb-1 text-sm font-extrabold text-white"
+              className="inline-flex items-center gap-2 border-b-2 border-(--accent) pb-1 text-sm font-extrabold text-white"
             >
               <span>{isFa ? "مسیر حرفه‌ای من" : "My Experience"}</span>
               <ArrowIcon className="h-3.5 w-3.5" />
@@ -428,11 +428,21 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* 4. Trust Signals */}
+      {/* 4. About -> Education -> Publications -> Experience -> Skills -> TechStack */}
+      <div className="mx-auto max-w-6xl space-y-24 px-6 pt-24">
+        <AboutSection locale={lang} />
+        <EducationSection locale={lang} />
+        <PublicationsSection locale={lang} />
+        <ExperienceSection locale={lang} />
+        <SkillsSection locale={lang} />
+        <TechStackSection locale={lang} />
+      </div>
+
+      {/* 5. Trust Signals (اعتماد در عمل) */}
       <section className="mx-auto max-w-6xl px-6 py-24" aria-labelledby="trust-title">
         <div className="grid items-end gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <div>
-            <span className="text-xs font-extrabold text-[var(--accent)]">
+            <span className="text-xs font-extrabold text-(--accent)">
               {isFa ? "اعتماد در عمل" : "VERIFIABLE PROOF"}
             </span>
             <h2
@@ -443,18 +453,18 @@ export default async function HomePage({
                 <>
                   قبل از همکاری،
                   <br />
-                  <em className="not-italic text-[var(--accent)]">خودت بررسی کن.</em>
+                  <em className="not-italic text-(--accent)">خودت بررسی کن.</em>
                 </>
               ) : (
                 <>
                   Verify the work
                   <br />
-                  <em className="not-italic text-[var(--accent)]">before we collaborate.</em>
+                  <em className="not-italic text-(--accent)">before we collaborate.</em>
                 </>
               )}
             </h2>
           </div>
-          <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+          <p className="text-sm leading-relaxed text-(--text-muted)">
             {isFa
               ? "اعتماد با چند جمله تبلیغاتی ساخته نمی‌شود. اینجا مسیرهایی را می‌بینی که تجربه فنی، خروجی‌ها و فعالیت حرفه‌ای من را قابل بررسی می‌کنند."
               : "Trust isn't built with slogans. Explore real case studies, peer-reviewed papers, open-source code, and public career records."}
@@ -466,17 +476,17 @@ export default async function HomePage({
             ({ Icon, label, title, text, href, external, action }, index) => {
               const cardContent = (
                 <>
-                  <div className="mb-8 grid h-12 w-12 place-items-center rounded-[16px_8px] bg-[var(--accent-soft)] text-[var(--accent)]">
+                  <div className="mb-8 grid h-12 w-12 place-items-center rounded-[16px_8px] bg-(--accent-soft) text-(--accent)">
                     <Icon className="h-5 w-5" />
                   </div>
-                  <span className="text-xs font-bold text-[var(--text-muted)]">
+                  <span className="text-xs font-bold text-(--text-muted)">
                     0{index + 1} / {label}
                   </span>
                   <h3 className="mt-2 text-lg font-extrabold">{title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-[var(--text-muted)]">
+                  <p className="mt-2 text-xs leading-relaxed text-(--text-muted)">
                     {text}
                   </p>
-                  <b className="mt-auto inline-flex items-center gap-1.5 pt-6 text-xs font-extrabold text-[var(--accent)]">
+                  <b className="mt-auto inline-flex items-center gap-1.5 pt-6 text-xs font-extrabold text-(--accent)">
                     <span>{action}</span>
                     <ArrowIcon className="h-3 w-3 transition-transform group-hover:-translate-x-1 ltr:group-hover:translate-x-1" />
                   </b>
@@ -506,10 +516,10 @@ export default async function HomePage({
           )}
         </div>
 
-        <div className="mt-8 flex items-start gap-3 rounded-2xl border border-emerald-600/20 bg-emerald-500/5 p-4 text-xs leading-relaxed text-[var(--text-muted)]">
+        <div className="mt-8 flex items-start gap-3 rounded-2xl border border-emerald-600/20 bg-emerald-500/5 p-4 text-xs leading-relaxed text-(--text-muted)">
           <FaCheck className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
           <p>
-            <strong className="text-[var(--text)]">
+            <strong className="text-(--text)">
               {isFa ? "شفافیت مهم‌تر از نمایش است. " : "Transparency over hype. "}
             </strong>
             {isFa
@@ -519,20 +529,10 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* 5. Experience, Skills, TechStack, Education & Publications */}
-      <div className="mx-auto max-w-6xl space-y-24 px-6 pb-24">
-        <ExperienceSection locale={lang} />
-        <SkillsSection locale={lang} />
-        <TechStackSection locale={lang} />
-        <EducationSection locale={lang} />
-        <PublicationsSection locale={lang} />
-        <AboutSection locale={lang} />
-      </div>
-
       {/* 6. Proof & Final CTA */}
-      <section id="contact" className="scroll-mt-24 bg-[var(--surface-muted)] py-20">
+      <section id="contact" className="scroll-mt-24 bg-(--surface-muted) py-20">
         <div className="mx-auto max-w-6xl px-6">
-          <div className="grid grid-cols-2 divide-y divide-[var(--border)] border-y border-[var(--border)] md:grid-cols-4 md:divide-x md:divide-y-0 rtl:md:divide-x-reverse">
+          <div className="grid grid-cols-2 divide-y divide-(--border) border-y border-(--border) md:grid-cols-4 md:divide-x md:divide-y-0 rtl:md:divide-x-reverse">
             {stats.map(([num, label]) => (
               <div
                 key={label}
@@ -541,7 +541,7 @@ export default async function HomePage({
                 <strong className="text-4xl font-black tabular-nums sm:text-5xl">
                   {num}
                 </strong>
-                <span className="mt-2 text-xs font-medium text-[var(--text-muted)]">
+                <span className="mt-2 text-xs font-medium text-(--text-muted)">
                   {label}
                 </span>
               </div>
@@ -550,7 +550,7 @@ export default async function HomePage({
 
           <div className="mt-16 grid items-end gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             <div>
-              <span className="text-xs font-extrabold text-[var(--accent)]">
+              <span className="text-xs font-extrabold text-(--accent)">
                 {isFa ? "یک ایده خوب داری؟" : "HAVE A GREAT IDEA?"}
               </span>
               <h2 className="mt-2 text-3xl font-black leading-tight sm:text-5xl">
@@ -571,19 +571,19 @@ export default async function HomePage({
             </div>
 
             <div>
-              <p className="text-sm leading-relaxed text-[var(--text-muted)]">
+              <p className="text-sm leading-relaxed text-(--text-muted)">
                 {isFa
                   ? "برای توسعه محصول، مشاوره فنی یا یک همکاری جدی آماده‌ام."
                   : "Available for product development, technical consulting, and full-stack roles."}
               </p>
-              <a
-                href="mailto:mohammadaminmollakazemiha@gmail.com"
-                className="mt-5 flex items-center justify-between gap-4 rounded-2xl bg-[var(--accent)] px-6 py-4 text-sm font-extrabold text-white shadow-lg transition-transform hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
+              <Link
+                href={`/${lang}/contact`}
+                className="mt-5 flex items-center justify-between gap-4 rounded-2xl bg-(--accent) px-6 py-4 text-sm font-extrabold text-white shadow-lg transition-transform hover:-translate-y-0.5 hover:bg-(--accent-hover)"
               >
                 <span>{isFa ? "شروع یک گفتگو" : "Start a Conversation"}</span>
                 <ArrowIcon className="h-4 w-4" />
-              </a>
-              <small className="mt-3 flex items-center gap-2 text-xs text-[var(--text-muted)]">
+              </Link>
+              <small className="mt-3 flex items-center gap-2 text-xs text-(--text-muted)">
                 <FaCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>
                   {isFa

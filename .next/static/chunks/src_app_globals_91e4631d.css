@@ -1511,6 +1511,10 @@
     max-width: var(--container-xl);
   }
 
+  .min-w-0 {
+    min-width: 0;
+  }
+
   .flex-1 {
     flex: 1;
   }
@@ -1748,6 +1752,10 @@
     border-bottom-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
   }
 
+  :where(.divide-\(--border\) > :not(:last-child)) {
+    border-color: var(--border);
+  }
+
   :where(.divide-\[var\(--border\)\] > :not(:last-child)) {
     border-color: var(--border);
   }
@@ -1772,6 +1780,12 @@
     }
   }
 
+  .truncate {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
   .overflow-hidden {
     overflow: hidden;
   }
@@ -1782,6 +1796,10 @@
 
   .rounded-2xl {
     border-radius: var(--radius-2xl);
+  }
+
+  .rounded-\[14px_6px\] {
+    border-radius: 14px 6px;
   }
 
   .rounded-\[16px_8px\] {
@@ -1887,6 +1905,26 @@
 
   .border-\(--accent\) {
     border-color: var(--accent);
+  }
+
+  .border-\(--accent\)\/20 {
+    border-color: var(--accent);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .border-\(--accent\)\/20 {
+      border-color: color-mix(in oklab, var(--accent) 20%, transparent);
+    }
+  }
+
+  .border-\(--accent\)\/25 {
+    border-color: var(--accent);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .border-\(--accent\)\/25 {
+      border-color: color-mix(in oklab, var(--accent) 25%, transparent);
+    }
   }
 
   .border-\(--border\) {
@@ -2031,6 +2069,16 @@
     background-color: var(--bg);
   }
 
+  .bg-\(--bg\)\/75 {
+    background-color: var(--bg);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-\(--bg\)\/75 {
+      background-color: color-mix(in oklab, var(--bg) 75%, transparent);
+    }
+  }
+
   .bg-\(--border\) {
     background-color: var(--border);
   }
@@ -2041,6 +2089,56 @@
 
   .bg-\(--surface\) {
     background-color: var(--surface);
+  }
+
+  .bg-\(--surface\)\/70 {
+    background-color: var(--surface);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-\(--surface\)\/70 {
+      background-color: color-mix(in oklab, var(--surface) 70%, transparent);
+    }
+  }
+
+  .bg-\(--surface\)\/75 {
+    background-color: var(--surface);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-\(--surface\)\/75 {
+      background-color: color-mix(in oklab, var(--surface) 75%, transparent);
+    }
+  }
+
+  .bg-\(--surface\)\/80 {
+    background-color: var(--surface);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-\(--surface\)\/80 {
+      background-color: color-mix(in oklab, var(--surface) 80%, transparent);
+    }
+  }
+
+  .bg-\(--surface\)\/85 {
+    background-color: var(--surface);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-\(--surface\)\/85 {
+      background-color: color-mix(in oklab, var(--surface) 85%, transparent);
+    }
+  }
+
+  .bg-\(--surface\)\/90 {
+    background-color: var(--surface);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-\(--surface\)\/90 {
+      background-color: color-mix(in oklab, var(--surface) 90%, transparent);
+    }
   }
 
   .bg-\(--surface-muted\) {
@@ -2709,6 +2807,10 @@
     padding-top: calc(var(--spacing) * 16);
   }
 
+  .pt-24 {
+    padding-top: calc(var(--spacing) * 24);
+  }
+
   .pt-44 {
     padding-top: calc(var(--spacing) * 44);
   }
@@ -2884,6 +2986,16 @@
   @supports (color: color-mix(in lab, red, red)) {
     .text-\(--text-muted\)\/60 {
       color: color-mix(in oklab, var(--text-muted) 60%, transparent);
+    }
+  }
+
+  .text-\(--text-muted\)\/80 {
+    color: var(--text-muted);
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .text-\(--text-muted\)\/80 {
+      color: color-mix(in oklab, var(--text-muted) 80%, transparent);
     }
   }
 
@@ -3263,12 +3375,20 @@
       scale: var(--tw-scale-x) var(--tw-scale-y);
     }
 
+    :is(:where(.group):hover .group-hover\:bg-\(--accent\)) {
+      background-color: var(--accent);
+    }
+
     :is(:where(.group):hover .group-hover\:text-\(--accent\)) {
       color: var(--accent);
     }
 
     :is(:where(.group):hover .group-hover\:text-\[var\(--accent\)\]) {
       color: var(--accent);
+    }
+
+    :is(:where(.group):hover .group-hover\:text-white) {
+      color: var(--color-white);
     }
 
     :is(:where(.group):hover .group-hover\:opacity-100) {
@@ -3352,7 +3472,7 @@
       rotate: -1deg;
     }
 
-    .hover\:border-\(--accent\)\/50:hover {
+    .hover\:border-\(--accent\):hover, .hover\:border-\(--accent\)\/50:hover {
       border-color: var(--accent);
     }
 
@@ -3460,8 +3580,24 @@
       }
     }
 
+    .hover\:bg-\(--accent\):hover {
+      background-color: var(--accent);
+    }
+
+    .hover\:bg-\(--accent-hover\):hover {
+      background-color: var(--accent-hover);
+    }
+
     .hover\:bg-\(--bg\):hover {
       background-color: var(--bg);
+    }
+
+    .hover\:bg-\(--surface\):hover {
+      background-color: var(--surface);
+    }
+
+    .hover\:bg-\(--surface-muted\):hover {
+      background-color: var(--surface-muted);
     }
 
     .hover\:bg-\[var\(--accent\)\]:hover {

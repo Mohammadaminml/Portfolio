@@ -570,41 +570,48 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$translations$
 ;
 ;
 ;
-const SOCIALS = [
-    {
-        href: "https://t.me/MohammadAminTech",
-        label: "Telegram",
-        Icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaTelegram"]
-    },
-    {
-        href: "https://www.linkedin.com/in/mohammad-amin-mollakazemiha-52a3a2201",
-        label: "LinkedIn",
-        Icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaLinkedin"]
-    },
-    {
-        href: "https://github.com/Mohammadaminml",
-        label: "GitHub",
-        Icon: __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaGithub"]
-    }
-];
 function Navbar({ locale }) {
     const pathname = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["usePathname"])();
     const [isOpen, setIsOpen] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isScrolled, setIsScrolled] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [theme, setTheme] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])("light");
     const toggleRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     const menuRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useRef"])(null);
     const t = (0, __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$data$2f$translations$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["getTranslations"])(locale);
-    const otherLocale = locale === "fa" ? "en" : "fa";
+    const isFa = locale === "fa";
+    const otherLocale = isFa ? "en" : "fa";
     const switchedPath = pathname ? pathname.replace(new RegExp(`^/${locale}(?=/|$)`), `/${otherLocale}`) : `/${otherLocale}`;
     const navigation = [
+        // منوی اصلی (۵ مورد اول)
         {
             href: `/${locale}`,
             labelKey: "home",
             exact: true
         },
         {
+            href: `/${locale}#skills`,
+            labelKey: "skills"
+        },
+        {
             href: `/${locale}/projects`,
             labelKey: "projects"
+        },
+        {
+            href: `/${locale}#education`,
+            labelKey: "education"
+        },
+        {
+            href: `/${locale}#experience`,
+            labelKey: "experience"
+        },
+        // منوی بیشتر (۵ مورد بعدی)
+        {
+            href: `/${locale}#publications`,
+            labelKey: "publications"
+        },
+        {
+            href: `/${locale}#tech`,
+            labelKey: "techStack"
         },
         {
             href: `/${locale}/shop`,
@@ -615,27 +622,7 @@ function Navbar({ locale }) {
             labelKey: "blog"
         },
         {
-            href: `/${locale}#experience`,
-            labelKey: "experience"
-        },
-        {
-            href: `/${locale}#skills`,
-            labelKey: "skills"
-        },
-        {
-            href: `/${locale}#education`,
-            labelKey: "education"
-        },
-        {
-            href: `/${locale}#publications`,
-            labelKey: "publications"
-        },
-        {
-            href: `/${locale}#tech`,
-            labelKey: "techStack"
-        },
-        {
-            href: `/${locale}#contact`,
+            href: `/${locale}/contact`,
             labelKey: "contact"
         }
     ];
@@ -647,6 +634,21 @@ function Navbar({ locale }) {
         return pathname?.startsWith(item.href) ?? false;
     };
     const closeMenu = ()=>setIsOpen(false);
+    // همگام‌سازی تم با localStorage و تگ html
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
+        const saved = localStorage.getItem("theme");
+        const initial = saved === "dark" || !saved && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        setTheme(initial);
+        document.documentElement.dataset.theme = initial;
+        document.documentElement.classList.toggle("dark", initial === "dark");
+    }, []);
+    const toggleTheme = ()=>{
+        const next = theme === "light" ? "dark" : "light";
+        setTheme(next);
+        localStorage.setItem("theme", next);
+        document.documentElement.dataset.theme = next;
+        document.documentElement.classList.toggle("dark", next === "dark");
+    };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const handleScroll = ()=>setIsScrolled(window.scrollY > 24);
         const handleResize = ()=>{
@@ -697,8 +699,8 @@ function Navbar({ locale }) {
         isOpen
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
-        "aria-label": locale === "fa" ? "ناوبری اصلی" : "Main navigation",
-        className: `sticky top-0 z-50 w-full border-b transition-all duration-300 ${isScrolled ? "border-[var(--border)] bg-[var(--surface)]/85 shadow-sm backdrop-blur-xl" : "border-transparent bg-[var(--bg)]/75 backdrop-blur-md"}`,
+        "aria-label": isFa ? "ناوبری اصلی" : "Main navigation",
+        className: `sticky top-0 z-50 w-full border-b transition-all duration-300 ${isScrolled ? "border-(--border) bg-(--surface)/85 shadow-sm backdrop-blur-xl" : "border-transparent bg-(--bg)/75 backdrop-blur-md"}`,
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: `mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 transition-all duration-300 ${isScrolled ? "h-16" : "h-20"}`,
@@ -706,11 +708,11 @@ function Navbar({ locale }) {
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                         href: `/${locale}`,
                         onClick: closeMenu,
-                        className: "text-base font-black tracking-tight text-[var(--text)] transition-colors hover:text-[var(--accent)] sm:text-lg",
+                        className: "text-base font-black tracking-tight text-(--text) transition-colors hover:text-(--accent) sm:text-lg",
                         children: t.nav.portfolio
                     }, void 0, false, {
                         fileName: "[project]/src/components/Navbar.tsx",
-                        lineNumber: 145,
+                        lineNumber: 154,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -720,11 +722,11 @@ function Navbar({ locale }) {
                                 const active = isActive(item);
                                 return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                     href: item.href,
-                                    className: `transition-colors ${active ? "text-[var(--accent)]" : "text-[var(--text-muted)] hover:text-[var(--text)]"}`,
+                                    className: `transition-colors ${active ? "text-(--accent)" : "text-(--text-muted) hover:text-(--text)"}`,
                                     children: t.nav[item.labelKey]
                                 }, item.href, false, {
                                     fileName: "[project]/src/components/Navbar.tsx",
-                                    lineNumber: 158,
+                                    lineNumber: 167,
                                     columnNumber: 15
                                 }, this);
                             }),
@@ -734,13 +736,13 @@ function Navbar({ locale }) {
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         type: "button",
                                         "aria-haspopup": "true",
-                                        className: "flex items-center gap-1 py-4 text-[var(--text-muted)] transition-colors hover:text-[var(--text)]",
+                                        className: "flex items-center gap-1 py-4 text-(--text-muted) transition-colors hover:text-(--text)",
                                         children: [
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 children: t.nav.more
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Navbar.tsx",
-                                                lineNumber: 179,
+                                                lineNumber: 188,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -749,79 +751,80 @@ function Navbar({ locale }) {
                                                 children: "⌄"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Navbar.tsx",
-                                                lineNumber: 180,
+                                                lineNumber: 189,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/Navbar.tsx",
-                                        lineNumber: 174,
+                                        lineNumber: 183,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "invisible absolute top-full end-0 w-52 translate-y-1 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-2 opacity-0 shadow-xl transition-all duration-200 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100",
-                                        children: moreNavigation.map((item)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                        className: "invisible absolute top-full end-0 w-52 translate-y-1 rounded-2xl border border-(--border) bg-(--surface) p-2 opacity-0 shadow-xl transition-all duration-200 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100",
+                                        children: moreNavigation.map((item)=>{
+                                            const active = isActive(item);
+                                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                                 href: item.href,
-                                                className: "block rounded-xl px-4 py-2.5 text-sm font-medium text-[var(--text-muted)] transition-colors hover:bg-[var(--surface-muted)] hover:text-[var(--text)]",
+                                                className: `block rounded-xl px-4 py-2.5 text-sm font-medium transition-colors ${active ? "bg-(--accent-soft) text-(--accent)" : "text-(--text-muted) hover:bg-(--surface-muted) hover:text-(--text)"}`,
                                                 children: t.nav[item.labelKey]
                                             }, item.href, false, {
                                                 fileName: "[project]/src/components/Navbar.tsx",
-                                                lineNumber: 187,
-                                                columnNumber: 17
-                                            }, this))
+                                                lineNumber: 198,
+                                                columnNumber: 19
+                                            }, this);
+                                        })
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Navbar.tsx",
-                                        lineNumber: 185,
+                                        lineNumber: 194,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Navbar.tsx",
-                                lineNumber: 173,
+                                lineNumber: 182,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Navbar.tsx",
-                        lineNumber: 154,
+                        lineNumber: 163,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "flex items-center gap-3",
+                        className: "flex items-center gap-2.5",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                 href: switchedPath,
-                                "aria-label": locale === "fa" ? "Switch to English" : "تغییر به فارسی",
-                                className: "rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-xs font-extrabold text-[var(--text)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]",
-                                children: locale === "fa" ? "EN" : "فا"
+                                "aria-label": isFa ? "Switch to English" : "تغییر به فارسی",
+                                className: "rounded-full border border-(--border) bg-(--surface) px-3 py-1.5 text-xs font-extrabold text-(--text) transition-colors hover:border-(--accent) hover:text-(--accent)",
+                                children: isFa ? "EN" : "فا"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Navbar.tsx",
-                                lineNumber: 201,
+                                lineNumber: 217,
                                 columnNumber: 11
                             }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "hidden items-center gap-1.5 xl:flex",
-                                children: SOCIALS.map(({ href, label, Icon })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                        href: href,
-                                        target: "_blank",
-                                        rel: "noopener noreferrer",
-                                        "aria-label": label,
-                                        className: "grid h-9 w-9 place-items-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]",
-                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {
-                                            className: "h-4 w-4"
-                                        }, void 0, false, {
-                                            fileName: "[project]/src/components/Navbar.tsx",
-                                            lineNumber: 219,
-                                            columnNumber: 17
-                                        }, this)
-                                    }, label, false, {
-                                        fileName: "[project]/src/components/Navbar.tsx",
-                                        lineNumber: 211,
-                                        columnNumber: 15
-                                    }, this))
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                type: "button",
+                                onClick: toggleTheme,
+                                "aria-label": theme === "dark" ? isFa ? "تغییر به حالت روشن" : "Switch to light mode" : isFa ? "تغییر به حالت تیره" : "Switch to dark mode",
+                                className: "grid h-9 w-9 place-items-center rounded-full border border-(--border) bg-(--surface) text-(--text-muted) transition-colors hover:border-(--accent) hover:text-(--accent)",
+                                children: theme === "dark" ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaSun"], {
+                                    className: "h-4 w-4"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Navbar.tsx",
+                                    lineNumber: 240,
+                                    columnNumber: 15
+                                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaMoon"], {
+                                    className: "h-4 w-4"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/components/Navbar.tsx",
+                                    lineNumber: 242,
+                                    columnNumber: 15
+                                }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Navbar.tsx",
-                                lineNumber: 209,
+                                lineNumber: 225,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -831,95 +834,67 @@ function Navbar({ locale }) {
                                 "aria-label": isOpen ? t.nav.closeMenu : t.nav.openMenu,
                                 "aria-expanded": isOpen,
                                 "aria-controls": "mobile-navigation",
-                                className: "grid h-10 w-10 place-items-center rounded-xl border border-[var(--border)] text-xl text-[var(--text)] lg:hidden",
+                                className: "grid h-10 w-10 place-items-center rounded-xl border border-(--border) text-xl text-(--text) lg:hidden",
                                 children: isOpen ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaXmark"], {}, void 0, false, {
                                     fileName: "[project]/src/components/Navbar.tsx",
-                                    lineNumber: 233,
+                                    lineNumber: 255,
                                     columnNumber: 23
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2d$icons$2f$fa6$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["FaBars"], {}, void 0, false, {
                                     fileName: "[project]/src/components/Navbar.tsx",
-                                    lineNumber: 233,
+                                    lineNumber: 255,
                                     columnNumber: 37
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Navbar.tsx",
-                                lineNumber: 224,
+                                lineNumber: 246,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Navbar.tsx",
-                        lineNumber: 200,
+                        lineNumber: 216,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/Navbar.tsx",
-                lineNumber: 139,
+                lineNumber: 148,
                 columnNumber: 7
             }, this),
             isOpen && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 ref: menuRef,
                 id: "mobile-navigation",
-                "aria-label": locale === "fa" ? "منوی موبایل" : "Mobile menu",
-                className: "max-h-[calc(100vh-72px)] overflow-y-auto border-t border-[var(--border)] bg-[var(--surface)] px-6 py-4 shadow-xl lg:hidden",
-                children: [
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "mx-auto grid max-w-6xl gap-1 sm:grid-cols-2",
-                        children: navigation.map((item)=>{
-                            const active = isActive(item);
-                            return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                href: item.href,
-                                onClick: closeMenu,
-                                className: `rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${active ? "bg-[var(--accent-soft)] text-[var(--accent)]" : "text-[var(--text-muted)] hover:bg-[var(--surface-muted)] hover:text-[var(--text)]"}`,
-                                children: t.nav[item.labelKey]
-                            }, item.href, false, {
-                                fileName: "[project]/src/components/Navbar.tsx",
-                                lineNumber: 250,
-                                columnNumber: 17
-                            }, this);
-                        })
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/Navbar.tsx",
-                        lineNumber: 246,
-                        columnNumber: 11
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "mx-auto mt-4 flex max-w-6xl items-center gap-3 border-t border-[var(--border)] pt-4",
-                        "aria-label": locale === "fa" ? "شبکه‌های اجتماعی" : "Social links",
-                        children: SOCIALS.map(({ href, label, Icon })=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
-                                href: href,
-                                target: "_blank",
-                                rel: "noopener noreferrer",
-                                "aria-label": label,
-                                className: "grid h-10 w-10 place-items-center rounded-full border border-[var(--border)] text-[var(--text-muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(Icon, {
-                                    className: "h-4 w-4"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/Navbar.tsx",
-                                    lineNumber: 279,
-                                    columnNumber: 17
-                                }, this)
-                            }, label, false, {
-                                fileName: "[project]/src/components/Navbar.tsx",
-                                lineNumber: 271,
-                                columnNumber: 15
-                            }, this))
-                    }, void 0, false, {
-                        fileName: "[project]/src/components/Navbar.tsx",
-                        lineNumber: 266,
-                        columnNumber: 11
-                    }, this)
-                ]
-            }, void 0, true, {
+                "aria-label": isFa ? "منوی موبایل" : "Mobile menu",
+                className: "max-h-[calc(100vh-72px)] overflow-y-auto border-t border-(--border) bg-(--surface) px-6 py-4 shadow-xl lg:hidden",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "mx-auto grid max-w-6xl gap-1 sm:grid-cols-2",
+                    children: navigation.map((item)=>{
+                        const active = isActive(item);
+                        return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                            href: item.href,
+                            onClick: closeMenu,
+                            className: `rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${active ? "bg-(--accent-soft) text-(--accent)" : "text-(--text-muted) hover:bg-(--surface-muted) hover:text-(--text)"}`,
+                            children: t.nav[item.labelKey]
+                        }, item.href, false, {
+                            fileName: "[project]/src/components/Navbar.tsx",
+                            lineNumber: 272,
+                            columnNumber: 17
+                        }, this);
+                    })
+                }, void 0, false, {
+                    fileName: "[project]/src/components/Navbar.tsx",
+                    lineNumber: 268,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
                 fileName: "[project]/src/components/Navbar.tsx",
-                lineNumber: 240,
+                lineNumber: 262,
                 columnNumber: 9
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/Navbar.tsx",
-        lineNumber: 131,
+        lineNumber: 140,
         columnNumber: 5
     }, this);
 }
