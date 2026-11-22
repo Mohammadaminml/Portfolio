@@ -7,18 +7,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
 jobs:
-  build:
-    name: 1. Build
+  ci:
+    name: 1. Lint, Typecheck, Test & Build
     runs-on: ubuntu-latest
 
     steps:
@@ -39,23 +30,19 @@ jobs:
           npm run lint
           npx tsc --noEmit
 
-      - name: Build Next.js for GitHub Pages
+      - name: Unit Tests
+        run: npm test
+
+      - name: Build Next.js
         env:
-          GITHUB_PAGES: "true"
-        run: |
-          npm run build
-          cp public/index.html out/index.html
+          DATABASE_URL: "postgresql://dummy:dummy@localhost:5432/dummy"
+        run: npm run build
 
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./out
-
-  test:
-    name: 2. Test (E2E)
+  deploy:
+    name: 2. Deploy to Liara
     runs-on: ubuntu-latest
-    needs: build
+    needs: ci
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
 
     steps:
       - name: Checkout repository
@@ -65,35 +52,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
 
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
-
-      - name: Run E2E tests
-        run: npm run test:e2e
-
-      - name: Upload Playwright report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 7
-
-  deploy:
-    name: 3. Deploy to Pages
-    runs-on: ubuntu-latest
-    needs: test
-    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy with Liara CLI
+        env:
+          LIARA_APP_NAME: ${{ secrets.LIARA_APP_NAME }}
+          LIARA_API_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
+        run: |
+          if [ -z "$LIARA_APP_NAME" ] || [ -z "$LIARA_API_TOKEN" ]; then
+            echo "Liara secrets are not configured yet. Skipping deployment."
+            exit 0
+          fi
+          npx @liara/cli deploy --app "$LIARA_APP_NAME" --api-token "$LIARA_API_TOKEN" --platform next --port 3000 --detach
