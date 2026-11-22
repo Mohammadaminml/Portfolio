@@ -15,6 +15,8 @@ import {
   togglePublishAction,
 } from "./projects/actions";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminDashboardPage() {
   const projects = await prisma.project.findMany({
     orderBy: [{ sortOrder: "asc" }, { createdAt: "desc" }],
