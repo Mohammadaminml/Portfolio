@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import SkillsSection from "../SkillsSection";
+import { SkillsSection } from "../SkillsSection";
 
 describe("SkillsSection", () => {
   it("renders Persian headings and skill badges", () => {
