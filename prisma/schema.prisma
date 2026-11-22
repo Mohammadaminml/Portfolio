@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  index       String
+  title       String
+  titleEn     String?
+  eyebrow     String
+  eyebrowEn   String?
+  summary     String
+  summaryEn   String?
+  description String   @db.Text
+  descriptionEn String? @db.Text
+  role        String
+  scope       String
+  tech        String[]
+  challenge   String   @db.Text
+  solution    String   @db.Text
+  decisions   String[]
+  outcomes    String[]
+  accent      String   @default("blue")
+  image       String
+  imageAlt    String
+  liveUrl     String?
+  githubUrl   String?
+  published   Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String?
+  message   String   @db.Text
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AiConversation {
+  id        String   @id @default(cuid())
+  sessionId String
+  role      String   // "user" | "assistant"
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+}

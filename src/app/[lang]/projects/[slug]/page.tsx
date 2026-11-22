@@ -9,9 +9,11 @@ import {
   FaCheck,
   FaGithub,
 } from "react-icons/fa6";
-import { getProjectBySlug, projects } from "@/data/projects";
 import { isValidLocale } from "@/lib/i18n";
+import { getProjectBySlug, getPublishedProjects } from "@/lib/projects";
 import { buildMetadata } from "@/lib/seo";
+
+export const dynamic = "force-dynamic";
 
 const HERO_GRADIENTS: Record<string, string> = {
   blue: "from-[#0c1d38] to-[#1e468c]",
@@ -20,12 +22,6 @@ const HERO_GRADIENTS: Record<string, string> = {
   mint: "from-[#0c1d38] to-[#105c4e]",
 };
 
-export function generateStaticParams() {
-  return (["fa", "en"] as const).flatMap((lang) =>
-    projects.map((project) => ({ lang, slug: project.slug }))
-  );
-}
-
 export async function generateMetadata({
   params,
 }: {
@@ -33,16 +29,21 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { lang, slug } = await params;
   if (!isValidLocale(lang)) return {};
-  const project = getProjectBySlug(slug);
+
+  const project = await getProjectBySlug(slug);
   if (!project) return {};
+
+  const isFa = lang === "fa";
+  const title = isFa ? project.title : (project.titleEn || project.title);
+  const summary = isFa ? project.summary : (project.summaryEn || project.summary);
 
   return buildMetadata({
     locale: lang,
     path: `/projects/${project.slug}`,
-    title: `${project.title} | ${
-      lang === "fa" ? "محمدامین ملاکاظمی‌ها" : "Mohammadamin Mollakazemiha"
+    title: `${title} | ${
+      isFa ? "محمدامین ملاکاظمی‌ها" : "Mohammadamin Mollakazemiha"
     }`,
-    description: project.summary,
+    description: summary,
   });
 }
 
@@ -54,20 +55,38 @@ export default async function ProjectDetailPage({
   const { lang, slug } = await params;
   if (!isValidLocale(lang)) notFound();
 
-  const project = getProjectBySlug(slug);
+  const [project, allProjects] = await Promise.all([
+    getProjectBySlug(slug),
+    getPublishedProjects(),
+  ]);
+
   if (!project) notFound();
 
   const isFa = lang === "fa";
   const BackArrow = isFa ? FaArrowRight : FaArrowLeft;
   const NextArrow = isFa ? FaArrowLeft : FaArrowRight;
 
-  const currentIndex = projects.findIndex((item) => item.slug === project.slug);
-  const nextProject = projects[(currentIndex + 1) % projects.length];
+  const title = isFa ? project.title : (project.titleEn || project.title);
+  const eyebrow = isFa ? project.eyebrow : (project.eyebrowEn || project.eyebrow);
+  const description = isFa
+    ? project.description
+    : (project.descriptionEn || project.description);
+
+  const currentIndex = allProjects.findIndex((item) => item.slug === project.slug);
+  const nextProject =
+    allProjects.length > 1
+      ? allProjects[(currentIndex + 1) % allProjects.length]
+      : null;
+  const nextTitle = nextProject
+    ? isFa
+      ? nextProject.title
+      : (nextProject.titleEn || nextProject.title)
+    : "";
+
   const heroGradient = HERO_GRADIENTS[project.accent] ?? HERO_GRADIENTS.blue;
 
   return (
     <article className="overflow-hidden bg-[var(--bg)]">
-      {/* Hero Header */}
       <header
         className={`bg-gradient-to-br ${heroGradient} pt-16 pb-24 text-white sm:pt-24 sm:pb-32`}
       >
@@ -83,13 +102,13 @@ export default async function ProjectDetailPage({
           <div className="mt-10 grid items-end gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
             <div>
               <p className="text-xs font-bold text-white/70">
-                {project.eyebrow} · {project.index}
+                {eyebrow} · {project.index}
               </p>
               <h1 className="mt-3 text-3xl font-black leading-tight sm:text-5xl lg:text-6xl">
-                {project.title}
+                {title}
               </h1>
               <p className="mt-5 max-w-2xl text-sm leading-relaxed text-white/75 sm:text-base">
-                {project.description}
+                {description}
               </p>
 
               {(project.liveUrl || project.githubUrl) && (
@@ -144,11 +163,10 @@ export default async function ProjectDetailPage({
             </dl>
           </div>
 
-          {/* Overlapping Cover Image */}
           <figure className="relative z-10 mt-12 -mb-36 aspect-[1.586/1] w-full overflow-hidden rounded-[28px_14px_28px_14px] border border-white/25 bg-[#10223e] shadow-2xl sm:mt-16 sm:-mb-52 sm:rounded-[40px_20px_40px_20px]">
             <Image
               src={project.image}
-              alt={project.imageAlt || project.title}
+              alt={project.imageAlt || title}
               fill
               priority
               sizes="(max-width: 1152px) 100vw, 1152px"
@@ -158,9 +176,7 @@ export default async function ProjectDetailPage({
         </div>
       </header>
 
-      {/* Case Study Body */}
       <div className="mx-auto max-w-6xl px-6 pt-44 pb-20 sm:pt-64 sm:pb-28">
-        {/* 01 Challenge */}
         <section className="grid max-w-4xl gap-4 border-t border-[var(--border)] py-12 md:grid-cols-[5rem_1fr] md:gap-10">
           <span className="font-mono text-sm font-bold text-[var(--text-muted)]">
             01
@@ -178,7 +194,6 @@ export default async function ProjectDetailPage({
           </div>
         </section>
 
-        {/* 02 Solution */}
         <section className="grid max-w-4xl gap-4 border-t border-[var(--border)] py-12 md:grid-cols-[5rem_1fr] md:gap-10">
           <span className="font-mono text-sm font-bold text-[var(--text-muted)]">
             02
@@ -196,7 +211,6 @@ export default async function ProjectDetailPage({
           </div>
         </section>
 
-        {/* Key Decisions (Navy Block) */}
         <section className="fa-navy-block mt-10 grid gap-10 rounded-[32px_16px_32px_16px] p-8 sm:p-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div className="space-y-3">
             <p className="text-xs font-extrabold text-[#8eb7ff]">
@@ -224,7 +238,6 @@ export default async function ProjectDetailPage({
           </ol>
         </section>
 
-        {/* Outcomes */}
         <section className="mt-20 space-y-6">
           <div className="space-y-2">
             <p className="text-xs font-extrabold text-[var(--accent)]">
@@ -259,34 +272,35 @@ export default async function ProjectDetailPage({
           </small>
         </section>
 
-        {/* Next Project */}
-        <section className="mt-20 flex items-center justify-between gap-6 border-t border-[var(--border)] pt-10">
-          <div>
-            <span className="text-xs text-[var(--text-muted)]">
-              {isFa ? "پروژه بعدی" : "Next Project"}
-            </span>
-            <h2 className="mt-1 text-xl font-black sm:text-3xl">
-              <Link
-                href={`/${lang}/projects/${nextProject.slug}`}
-                className="transition-colors hover:text-[var(--accent)]"
-              >
-                {nextProject.title}
-              </Link>
-            </h2>
-          </div>
+        {nextProject && (
+          <section className="mt-20 flex items-center justify-between gap-6 border-t border-[var(--border)] pt-10">
+            <div>
+              <span className="text-xs text-[var(--text-muted)]">
+                {isFa ? "پروژه بعدی" : "Next Project"}
+              </span>
+              <h2 className="mt-1 text-xl font-black sm:text-3xl">
+                <Link
+                  href={`/${lang}/projects/${nextProject.slug}`}
+                  className="transition-colors hover:text-[var(--accent)]"
+                >
+                  {nextTitle}
+                </Link>
+              </h2>
+            </div>
 
-          <Link
-            href={`/${lang}/projects/${nextProject.slug}`}
-            aria-label={
-              isFa
-                ? `پروژه بعدی: ${nextProject.title}`
-                : `Next project: ${nextProject.title}`
-            }
-            className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[var(--navy)] text-white transition-transform hover:-translate-x-1 ltr:hover:translate-x-1 dark:bg-[var(--accent)]"
-          >
-            <NextArrow className="h-4 w-4" />
-          </Link>
-        </section>
+            <Link
+              href={`/${lang}/projects/${nextProject.slug}`}
+              aria-label={
+                isFa
+                  ? `پروژه بعدی: ${nextTitle}`
+                  : `Next project: ${nextTitle}`
+              }
+              className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[var(--navy)] text-white transition-transform hover:-translate-x-1 ltr:hover:translate-x-1 dark:bg-[var(--accent)]"
+            >
+              <NextArrow className="h-4 w-4" />
+            </Link>
+          </section>
+        )}
       </div>
     </article>
   );

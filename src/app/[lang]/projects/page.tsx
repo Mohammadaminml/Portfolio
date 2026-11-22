@@ -8,9 +8,21 @@ import {
   FaArrowUpRightFromSquare,
   FaGithub,
 } from "react-icons/fa6";
-import { ACCENT_STYLES, projects } from "@/data/projects";
+import { ACCENT_STYLES } from "@/data/projects";
 import { isValidLocale } from "@/lib/i18n";
+import { getPublishedProjects } from "@/lib/projects";
 import { buildMetadata } from "@/lib/seo";
+
+export const dynamic = "force-dynamic";
+
+type AccentKey = keyof typeof ACCENT_STYLES;
+
+function getAccentStyle(accent: string) {
+  if (accent in ACCENT_STYLES) {
+    return ACCENT_STYLES[accent as AccentKey];
+  }
+  return Object.values(ACCENT_STYLES)[0];
+}
 
 export async function generateMetadata({
   params,
@@ -41,6 +53,7 @@ export default async function ProjectsPage({
   const { lang } = await params;
   if (!isValidLocale(lang)) notFound();
 
+  const projects = await getPublishedProjects();
   const isFa = lang === "fa";
   const ArrowIcon = isFa ? FaArrowLeft : FaArrowRight;
 
@@ -76,11 +89,14 @@ export default async function ProjectsPage({
 
       <div className="mt-14 grid gap-6 md:grid-cols-2">
         {projects.map((project) => {
-          const accent = ACCENT_STYLES[project.accent];
+          const accent = getAccentStyle(project.accent);
+          const title = isFa ? project.title : (project.titleEn || project.title);
+          const eyebrow = isFa ? project.eyebrow : (project.eyebrowEn || project.eyebrow);
+          const summary = isFa ? project.summary : (project.summaryEn || project.summary);
 
           return (
             <article
-              key={project.slug}
+              key={project.id}
               className={`sig-card group flex flex-col overflow-hidden ${accent.border}`}
             >
               <Link
@@ -91,7 +107,7 @@ export default async function ProjectsPage({
               >
                 <Image
                   src={project.image}
-                  alt={project.imageAlt || project.title}
+                  alt={project.imageAlt || title}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -105,7 +121,7 @@ export default async function ProjectsPage({
                     {project.index}
                   </span>
                   <small className={`rounded-full px-3 py-1 text-xs font-semibold ${accent.badge}`}>
-                    {project.eyebrow}
+                    {eyebrow}
                   </small>
                 </div>
 
@@ -114,12 +130,12 @@ export default async function ProjectsPage({
                     href={`/${lang}/projects/${project.slug}`}
                     className="transition-colors hover:text-[var(--accent)]"
                   >
-                    {project.title}
+                    {title}
                   </Link>
                 </h2>
 
                 <p className="mt-2.5 text-sm leading-relaxed text-[var(--text-muted)]">
-                  {project.summary}
+                  {summary}
                 </p>
 
                 <div
@@ -141,8 +157,8 @@ export default async function ProjectsPage({
                     href={`/${lang}/projects/${project.slug}`}
                     aria-label={
                       isFa
-                        ? `مطالعه جزئیات پروژه ${project.title}`
-                        : `Read case study: ${project.title}`
+                        ? `مطالعه جزئیات پروژه ${title}`
+                        : `Read case study: ${title}`
                     }
                     className="inline-flex items-center gap-1.5 text-[var(--accent)] transition-transform hover:-translate-x-0.5 ltr:hover:translate-x-0.5"
                   >
@@ -169,8 +185,8 @@ export default async function ProjectsPage({
                       rel="noopener noreferrer"
                       aria-label={
                         isFa
-                          ? `مخزن GitHub پروژه ${project.title}`
-                          : `GitHub repository for ${project.title}`
+                          ? `مخزن GitHub پروژه ${title}`
+                          : `GitHub repository for ${title}`
                       }
                       className="inline-flex items-center gap-1.5 text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
                     >
