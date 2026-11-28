@@ -25,6 +25,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Generate Prisma Client
+        run: npx prisma generate
+
       - name: Lint & Typecheck
         run: |
           npm run lint
@@ -39,27 +42,19 @@ jobs:
         run: npm run build
 
   deploy:
-    name: 2. Deploy to Liara
-    runs-on: ubuntu-latest
+    name: 2. Deploy to Windows Server
+    runs-on: self-hosted
     needs: ci
     if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Deploy with Liara CLI
-        env:
-          LIARA_APP_NAME: ${{ secrets.LIARA_APP_NAME }}
-          LIARA_API_TOKEN: ${{ secrets.LIARA_API_TOKEN }}
+      - name: Pull, Build & Restart PM2
+        shell: powershell
         run: |
-          if [ -z "$LIARA_APP_NAME" ] || [ -z "$LIARA_API_TOKEN" ]; then
-            echo "Liara secrets are not configured yet. Skipping deployment."
-            exit 0
-          fi
-          npx @liara/cli deploy --app "$LIARA_APP_NAME" --api-token "$LIARA_API_TOKEN" --platform next --port 3000 --detach
+          cd C:\Users\m.molakazemiha\Portfolio
+          git pull origin main
+          pm2 stop portfolio
+          npm ci
+          npx prisma generate
+          npm run build
+          pm2 restart portfolio
