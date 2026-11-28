@@ -100,9 +100,9 @@ export const translations = {
       email: "Email",
     },
     footer: {
-      name: "Mohammadamin Mollakazemiha",
+      name: "Mohammad Amin Mollakazemiha",
       role: "Full Stack Developer",
-      rights: "© 2026 All Rights Reserved.",
+      rights: "© 2026 Mohammad Amin Mollakazemiha. All Rights Reserved.",
     },
   },
   fa: {

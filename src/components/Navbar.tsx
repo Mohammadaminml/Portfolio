@@ -7,22 +7,11 @@ import { FaBars, FaMoon, FaSun, FaXmark } from "react-icons/fa6";
 import { getTranslations } from "@/data/translations";
 import { Locale } from "@/types/site";
 
-type NavKey =
-  | "home"
-  | "skills"
-  | "projects"
-  | "education"
-  | "experience"
-  | "publications"
-  | "techStack"
-  | "shop"
-  | "blog"
-  | "contact";
+type NavKey = "projects" | "shop" | "blog" | "experience";
 
 interface NavItem {
   href: string;
   labelKey: NavKey;
-  exact?: boolean;
 }
 
 export function Navbar({ locale }: { locale: Locale }) {
@@ -41,26 +30,17 @@ export function Navbar({ locale }: { locale: Locale }) {
     : `/${otherLocale}`;
 
   const navigation: NavItem[] = [
-    // منوی اصلی (۵ مورد اول)
-    { href: `/${locale}`, labelKey: "home", exact: true },
-    { href: `/${locale}#skills`, labelKey: "skills" },
     { href: `/${locale}/projects`, labelKey: "projects" },
-    { href: `/${locale}#education`, labelKey: "education" },
-    { href: `/${locale}#experience`, labelKey: "experience" },
-    // منوی بیشتر (۵ مورد بعدی)
-    { href: `/${locale}#publications`, labelKey: "publications" },
-    { href: `/${locale}#tech`, labelKey: "techStack" },
     { href: `/${locale}/shop`, labelKey: "shop" },
     { href: `/${locale}/blog`, labelKey: "blog" },
-    { href: `/${locale}/contact`, labelKey: "contact" },
+    { href: `/${locale}#experience`, labelKey: "experience" },
   ];
 
-  const primaryNavigation = navigation.slice(0, 5);
-  const moreNavigation = navigation.slice(5);
+  const contactHref = `/${locale}/contact`;
+  const isContactActive = pathname?.startsWith(contactHref) ?? false;
 
   const isActive = (item: NavItem) => {
     if (item.href.includes("#")) return false;
-    if (item.exact) return pathname === item.href;
     return pathname?.startsWith(item.href) ?? false;
   };
 
@@ -150,7 +130,7 @@ export function Navbar({ locale }: { locale: Locale }) {
           isScrolled ? "h-16" : "h-20"
         }`}
       >
-        {/* Brand */}
+        {/* Brand (Home Link) */}
         <Link
           href={`/${locale}`}
           onClick={closeMenu}
@@ -159,60 +139,30 @@ export function Navbar({ locale }: { locale: Locale }) {
           {t.nav.portfolio}
         </Link>
 
-        {/* Desktop Links */}
-        <div className="hidden items-center gap-6 text-sm font-semibold lg:flex">
-          {primaryNavigation.map((item) => {
+        {/* Desktop Links (4 Core Items) */}
+        <div className="hidden items-center gap-8 text-sm font-semibold lg:flex">
+          {navigation.map((item) => {
             const active = isActive(item);
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`transition-colors ${
+                className={`relative py-1 transition-colors ${
                   active
                     ? "text-(--accent)"
                     : "text-(--text-muted) hover:text-(--text)"
                 }`}
               >
                 {t.nav[item.labelKey]}
+                {active && (
+                  <span className="absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-(--accent)" />
+                )}
               </Link>
             );
           })}
-
-          {/* More Dropdown */}
-          <div className="group relative">
-            <button
-              type="button"
-              aria-haspopup="true"
-              className="flex items-center gap-1 py-4 text-(--text-muted) transition-colors hover:text-(--text)"
-            >
-              <span>{t.nav.more}</span>
-              <span aria-hidden="true" className="text-xs">
-                ⌄
-              </span>
-            </button>
-
-            <div className="invisible absolute top-full end-0 w-52 translate-y-1 rounded-2xl border border-(--border) bg-(--surface) p-2 opacity-0 shadow-xl transition-all duration-200 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
-              {moreNavigation.map((item) => {
-                const active = isActive(item);
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`block rounded-xl px-4 py-2.5 text-sm font-medium transition-colors ${
-                      active
-                        ? "bg-(--accent-soft) text-(--accent)"
-                        : "text-(--text-muted) hover:bg-(--surface-muted) hover:text-(--text)"
-                    }`}
-                  >
-                    {t.nav[item.labelKey]}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
         </div>
 
-        {/* End Actions: Language Switcher + Theme Toggle + Mobile Menu */}
+        {/* End Actions: Language + Theme + Contact CTA + Mobile Toggle */}
         <div className="flex items-center gap-2.5">
           <Link
             href={switchedPath}
@@ -243,6 +193,18 @@ export function Navbar({ locale }: { locale: Locale }) {
             )}
           </button>
 
+          {/* Desktop CTA Button */}
+          <Link
+            href={contactHref}
+            className={`hidden rounded-full px-4 py-2 text-xs font-bold transition-all lg:inline-flex ${
+              isContactActive
+                ? "bg-(--accent) text-white ring-2 ring-(--accent)/30"
+                : "bg-(--text) text-(--bg) hover:bg-(--accent) hover:text-white"
+            }`}
+          >
+            {t.nav.contact}
+          </Link>
+
           <button
             ref={toggleRef}
             type="button"
@@ -265,7 +227,7 @@ export function Navbar({ locale }: { locale: Locale }) {
           aria-label={isFa ? "منوی موبایل" : "Mobile menu"}
           className="max-h-[calc(100vh-72px)] overflow-y-auto border-t border-(--border) bg-(--surface) px-6 py-4 shadow-xl lg:hidden"
         >
-          <div className="mx-auto grid max-w-6xl gap-1 sm:grid-cols-2">
+          <div className="mx-auto flex max-w-6xl flex-col gap-1.5">
             {navigation.map((item) => {
               const active = isActive(item);
               return (
@@ -283,6 +245,14 @@ export function Navbar({ locale }: { locale: Locale }) {
                 </Link>
               );
             })}
+
+            <Link
+              href={contactHref}
+              onClick={closeMenu}
+              className="mt-2 rounded-xl bg-(--accent) px-4 py-3 text-center text-sm font-bold text-white transition-opacity hover:opacity-90"
+            >
+              {t.nav.contact}
+            </Link>
           </div>
         </div>
       )}

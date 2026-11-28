@@ -8,31 +8,34 @@ export function ExperienceSection({ locale }: { locale: Locale }) {
   return (
     <section id="experience" className="scroll-mt-24 space-y-10">
       <div className="space-y-1.5">
-        <span className="text-xs font-extrabold text-[var(--accent)]">
+        <span className="text-xs font-extrabold text-(--accent)">
           {isFa ? "مسیر حرفه‌ای" : "CAREER TIMELINE"}
         </span>
         <h2 className="text-3xl font-black">{experience.title}</h2>
       </div>
 
-      <div className="relative ms-3 border-s-2 border-[var(--border)]">
-        {experience.items.map(([title, company, year]) => (
-          <div key={`${title}-${year}`} className="relative mb-8 ms-7 last:mb-0">
+      <div className="relative ms-3 border-s-2 border-(--border)">
+        {experience.items.map(([title, company, year], index) => (
+          <div
+            key={`${title}-${company}-${year}-${index}`}
+            className="relative mb-8 ms-7 last:mb-0"
+          >
             <span
               aria-hidden="true"
-              className="absolute -start-[37px] top-7 h-4 w-4 rounded-full border-4 border-[var(--bg)] bg-[var(--accent)] shadow-sm"
+              className="absolute -start-[37px] top-7 h-4 w-4 rounded-full border-4 border-(--bg) bg-(--accent) shadow-sm"
             />
 
             <article className="sig-card p-6 transition-transform duration-200 hover:-translate-x-1.5 ltr:hover:translate-x-1.5">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h3 className="text-lg font-extrabold text-[var(--text)] sm:text-xl">
+                <h3 className="text-lg font-extrabold text-(--text) sm:text-xl">
                   {title}
                 </h3>
-                <span className="rounded-full border border-[var(--border)] bg-[var(--bg)] px-3 py-0.5 text-xs font-semibold text-[var(--text-muted)]">
+                <span className="rounded-full border border-(--border) bg-(--bg) px-3 py-0.5 text-xs font-semibold text-(--text-muted)">
                   {year}
                 </span>
               </div>
 
-              <p className="mt-2 text-sm font-semibold text-[var(--accent)]">
+              <p className="mt-2 text-sm font-semibold text-(--accent)">
                 {company}
               </p>
             </article>
